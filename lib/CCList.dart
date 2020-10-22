@@ -35,7 +35,7 @@ class CCList extends StatefulWidget{
     }
 
     _loadCC() async{
-      final response = await http.get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=10&limit=10&convert=USD&CMC_PRO_API_KEY=28ba80ec-0caa-494e-8ac0-176a5a0e8e4d');
+      final response = await http.get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=30&convert=USD&CMC_PRO_API_KEY=28ba80ec-0caa-494e-8ac0-176a5a0e8e4d');
 
       if(response.statusCode == 200){
         print(response.body);
@@ -50,20 +50,23 @@ class CCList extends StatefulWidget{
         // });
 
         Map<String, dynamic> allData = json.decode(response.body);
-        List<dynamic> data = allData["data"];
+        List<dynamic> ccData = allData["data"];
 
         var ccDataList = List<CCData>();
 
-        data.forEach((element) {
+        ccData.forEach((element) {
           var record = CCData(name: element['name'], symbol: element['symbol'], rank: element['cmc_rank'], price: element['quote']['USD']['price']);
           ccDataList.add(record);
         });
-        
+
+        setState(() {
+          data = ccDataList;
+        });
+
         }
-
-
-
       }
+
+
 
 
     List<Widget> _buildList(){
@@ -72,13 +75,18 @@ class CCList extends StatefulWidget{
         subtitle: Text(f.symbol),
         title: Text(f.name),
         leading: CircleAvatar(child: Text(f.rank.toString())),
-        trailing: Text('\$${f.price.toString()}'),
+        trailing: Text('\$${f.price.toStringAsFixed(2)}'),
 
       )).toList();
 
     }
 
+    @override
+  void initState() {
+      super.initState();
+      _loadCC();
   }
+}
 
 
 

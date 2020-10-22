@@ -35,7 +35,7 @@ class CCList extends StatefulWidget{
     }
 
     _loadCC() async{
-      final response = await http.get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=30&convert=USD&CMC_PRO_API_KEY=28ba80ec-0caa-494e-8ac0-176a5a0e8e4d');
+      final response = await http.get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=20&convert=USD&CMC_PRO_API_KEY=28ba80ec-0caa-494e-8ac0-176a5a0e8e4d');
 
       if(response.statusCode == 200){
         print(response.body);
@@ -55,7 +55,7 @@ class CCList extends StatefulWidget{
         var ccDataList = List<CCData>();
 
         ccData.forEach((element) {
-          var record = CCData(name: element['name'], symbol: element['symbol'], rank: element['cmc_rank'], price: element['quote']['USD']['price']);
+          var record = CCData(name: element['name'], symbol: element['symbol'], rank: element['cmc_rank'], price: checkDouble(element['quote']['USD']['price']));
           ccDataList.add(record);
         });
 
@@ -66,6 +66,14 @@ class CCList extends StatefulWidget{
         }
       }
 
+
+    static double checkDouble(dynamic value) {
+      if (value is String) {
+        return double.parse(value);
+      } else {
+        return value;
+      }
+    }
 
 
 

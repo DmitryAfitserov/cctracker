@@ -1,5 +1,7 @@
 import 'package:cctracker/CCData.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class CCList extends StatefulWidget{
 
@@ -24,9 +26,45 @@ class CCList extends StatefulWidget{
           child: ListView(
             children: _buildList(),
           ),
-        )
+        ),
+          floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.refresh),
+            onPressed: () => _loadCC(),
+      )
       );
     }
+
+    _loadCC() async{
+      final response = await http.get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=10&limit=10&convert=USD&CMC_PRO_API_KEY=28ba80ec-0caa-494e-8ac0-176a5a0e8e4d');
+
+      if(response.statusCode == 200){
+        print(response.body);
+
+        // var allData = (json.decode(response.body) as Map)['data'] as Map<String, dynamic>;
+        //
+        // var ccDataList = List<CCData>();
+        //
+        // allData.forEach((key, value) {
+        //   var record = CCData(name: value['name'], symbol: value['symbol'], rank: value['cmc_rank'], price: value['quote']['USD']['price']);
+        //   ccDataList.add(record);
+        // });
+
+        Map<String, dynamic> allData = json.decode(response.body);
+        List<dynamic> data = allData["data"];
+
+        var ccDataList = List<CCData>();
+
+        data.forEach((element) {
+          var record = CCData(name: element['name'], symbol: element['symbol'], rank: element['cmc_rank'], price: element['quote']['USD']['price']);
+          ccDataList.add(record);
+        });
+        
+        }
+
+
+
+      }
+
 
     List<Widget> _buildList(){
 

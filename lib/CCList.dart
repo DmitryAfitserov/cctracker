@@ -1,4 +1,5 @@
 import 'package:cctracker/CCData.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -16,6 +17,24 @@ class CCList extends StatefulWidget{
 
     List<CCData> data = [];
 
+    // @override
+    // Widget build(BuildContext context) {
+    //   return Scaffold(
+    //     appBar: AppBar(
+    //       title: Text('Awesome CC Tracker'),
+    //     ),
+    //     body: Container(
+    //       child: ListView(
+    //         children: _buildList(),
+    //       ),
+    //     ),
+    //       floatingActionButton: FloatingActionButton(
+    //         child: Icon(Icons.refresh),
+    //         onPressed: () => _loadCC(),
+    //   )
+    //   );
+    // }
+
     @override
     Widget build(BuildContext context) {
       return Scaffold(
@@ -23,14 +42,19 @@ class CCList extends StatefulWidget{
           title: Text('Awesome CC Tracker'),
         ),
         body: Container(
-          child: ListView(
-            children: _buildList(),
-          ),
+          child: ListView.builder(
+          padding: EdgeInsets.all(10.0),
+          shrinkWrap: false,
+          itemCount: data.length,
+          itemBuilder: (BuildContext context, int index) {
+            return _buildList(context, index);
+          }
+        )
         ),
           floatingActionButton: FloatingActionButton(
             child: Icon(Icons.refresh),
             onPressed: () => _loadCC(),
-      )
+          )
       );
     }
 
@@ -77,17 +101,77 @@ class CCList extends StatefulWidget{
 
 
 
-    List<Widget> _buildList(){
+    // List<Widget> _buildList(){
+    //
+    //   return data.map((CCData f) => ListTile(
+    //     subtitle: Text(f.symbol),
+    //     title: Text(f.name),
+    //     leading: CircleAvatar(child: Text(f.rank.toString())),
+    //     trailing: Text('\$${f.price.toStringAsFixed(2)}'),
+    //
+    //   )).toList();
+    //
+    // }
 
-      return data.map((CCData f) => ListTile(
-        subtitle: Text(f.symbol),
-        title: Text(f.name),
-        leading: CircleAvatar(child: Text(f.rank.toString())),
-        trailing: Text('\$${f.price.toStringAsFixed(2)}'),
+      Widget _buildList(BuildContext context, int index) {
+        return Card(
+          margin: EdgeInsets.symmetric(horizontal: 0, vertical: 2),
 
-      )).toList();
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Container(child: Row(
+              children: <Widget>[
+                  Container(margin: EdgeInsets.all(12), width: 28, child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Text(data[index].rank.toString(), style: TextStyle(fontSize: 24))
+                      ]
+                  )
+                  ),
+                  Container(height: 32,width: 2,color: Colors.blue,alignment: Alignment.centerLeft, child: Row(mainAxisAlignment: MainAxisAlignment.start,),),
+                  Container(margin:EdgeInsets.all(4), padding: EdgeInsets.all(6), child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Text(data[index].name, style: TextStyle(fontSize: 18)),
+                        Text(data[index].symbol)
 
-    }
+                      ]
+
+                  )
+
+                  )
+                ]
+
+              ),)
+
+
+,
+
+              Container(margin:EdgeInsets.all(4),  padding: EdgeInsets.all(6), child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+
+                    Text(data[index].price.toStringAsFixed(2), style: TextStyle(fontSize: 18)),
+                  ]
+
+              )
+
+
+
+
+              )
+
+            ],
+          ),
+        //  margin: EdgeInsets.all(0),
+        );
+      }
+
 
     @override
   void initState() {

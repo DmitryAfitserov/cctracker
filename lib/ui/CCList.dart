@@ -42,9 +42,7 @@ class CCList extends StatefulWidget{
       bloc.fetch();
       print(Text("main Widget build ------ ok"));
       return Scaffold(
-        appBar: AppBar(
-          title: Text('Awesome CC Tracker'),
-        ),
+
         body: Container(
           child:
 
@@ -67,10 +65,7 @@ class CCList extends StatefulWidget{
 
 
         ),
-          floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.refresh),
-            onPressed: () => bloc.fetch()
-          )
+
       );
     }
 
@@ -88,48 +83,6 @@ class CCList extends StatefulWidget{
           }
       );
     }
-
-    // _loadCC() async{
-    //   final response = await http.get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=20&convert=USD&CMC_PRO_API_KEY=28ba80ec-0caa-494e-8ac0-176a5a0e8e4d');
-    //
-    //   if(response.statusCode == 200){
-    //     print(response.body);
-    //
-    //     // var allData = (json.decode(response.body) as Map)['data'] as Map<String, dynamic>;
-    //     //
-    //     // var ccDataList = List<CCData>();
-    //     //
-    //     // allData.forEach((key, value) {
-    //     //   var record = CCData(name: value['name'], symbol: value['symbol'], rank: value['cmc_rank'], price: value['quote']['USD']['price']);
-    //     //   ccDataList.add(record);
-    //     // });
-    //
-    //     Map<String, dynamic> allData = json.decode(response.body);
-    //     List<dynamic> ccData = allData["data"];
-    //
-    //     var ccDataList = List<CCData>();
-    //
-    //     ccData.forEach((element) {
-    //       var record = CCData(name: element['name'], symbol: element['symbol'], rank: element['cmc_rank'], price: checkDouble(element['quote']['USD']['price']));
-    //       ccDataList.add(record);
-    //     });
-    //
-    //     setState(() {
-    //       data = ccDataList;
-    //     });
-    //
-    //     }
-    //   }
-
-    //
-    // static double checkDouble(dynamic value) {
-    //   if (value is String) {
-    //     return double.parse(value);
-    //   } else {
-    //     return value;
-    //   }
-    // }
-
 
 
     // List<Widget> _buildList(){
@@ -203,12 +156,6 @@ class CCList extends StatefulWidget{
         );
       }
 
-
-    @override
-  void initState() {
-      super.initState();
-    //  _loadCC();
-  }
 }
 
 

@@ -5,7 +5,7 @@ import 'package:cctracker/models/CCData.dart';
 class APIProvider {
 
   List<CCData> data = [];
-  final apiUrl = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=20&convert=USD&CMC_PRO_API_KEY=28ba80ec-0caa-494e-8ac0-176a5a0e8e4d";
+  final apiUrl = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=40&convert=USD&CMC_PRO_API_KEY=28ba80ec-0caa-494e-8ac0-176a5a0e8e4d";
 
   Future<List<CCData>> loadCC() async{
     final response = await http.get(apiUrl);

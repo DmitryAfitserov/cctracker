@@ -2,22 +2,31 @@ import 'package:cctracker/models/CCData.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cctracker/bloc/Bloc.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+
 
 class CCList extends StatefulWidget{
+
+  final List<CCData> data;
+
+  CCList(this.data);
 
   @override
   State createState() {
     print(Text("createState() ------ ok"));
-    return CCListState();
+    return CCListState(data);
   }
 }
 
 
   class CCListState extends State<CCList>{
 
-    List<CCData> data = [];
+    List<CCData> data;
+
+    CCListState(List<CCData> data){
+      this.data = data;
+    }
+
+
 
     // @override
     // Widget build(BuildContext context) {
@@ -39,32 +48,14 @@ class CCList extends StatefulWidget{
 
     @override
     Widget build(BuildContext context) {
-      bloc.fetch();
+
       print(Text("main Widget build ------ ok"));
       return Scaffold(
-
-        body: Container(
-          child:
-
-          StreamBuilder(
-            stream: bloc.allMovies,
-            builder: (context, AsyncSnapshot<List<CCData>> snapshot) {
-              if (snapshot.hasData) {
-              //  if(snapshot.data.isNotEmpty){
-                  print(Text("snapshot.hasData ------ ok"));
-                  return buildList(snapshot);
-              //  }
-
-              } else if (snapshot.hasError) {
-                print(Text("snapshot.hasData ------ error -----   " + snapshot.error.toString()));
-                return Text(snapshot.error.toString());
-              }
-              return Center(child: CircularProgressIndicator());
-            },
+          appBar: AppBar(
+            title: Text("CC Tracker moyt"),
           ),
 
-
-        ),
+        body: buildList()
 
       );
     }
@@ -72,14 +63,14 @@ class CCList extends StatefulWidget{
 
 
 
-    Widget buildList(AsyncSnapshot<List<CCData>> snapshot){
-      print(Text("buildList start ------ ok + snapshot.data.length =" + snapshot.data.length.toString()));
+    Widget buildList(){
+      print(Text("buildList start ------ ok + snapshot.data.length =" + data.length.toString()));
       return ListView.builder(
           padding: EdgeInsets.all(10.0),
           shrinkWrap: false,
-          itemCount: snapshot.data.length,
+          itemCount: data.length,
           itemBuilder: (BuildContext context, int index) {
-            return _buildItem(context, index, snapshot);
+            return _buildItem(context, index);
           }
       );
     }
@@ -97,9 +88,8 @@ class CCList extends StatefulWidget{
     //
     // }
 
-      Widget _buildItem(BuildContext context, int index, AsyncSnapshot<List<CCData>> snapshot) {
+      Widget _buildItem(BuildContext context, int index) {
         print(Text("_buildList ------ ok"));
-      data = snapshot.data;
         return Card(
           margin: EdgeInsets.symmetric(horizontal: 0, vertical: 2),
 
@@ -144,9 +134,6 @@ class CCList extends StatefulWidget{
                   ]
 
               )
-
-
-
 
               )
 

@@ -5,7 +5,7 @@ import 'package:cctracker/models/CCData.dart';
 class APIProvider {
 
   List<CCData> data = [];
-  final apiUrl = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=40&convert=USD&CMC_PRO_API_KEY=28ba80ec-0caa-494e-8ac0-176a5a0e8e4d";
+  final apiUrl = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=60&convert=USD&CMC_PRO_API_KEY=28ba80ec-0caa-494e-8ac0-176a5a0e8e4d";
 
   Future<List<CCData>> loadCC() async{
     final response = await http.get(apiUrl);
@@ -13,14 +13,7 @@ class APIProvider {
     if(response.statusCode == 200){
       print(response.body);
 
-      // var allData = (json.decode(response.body) as Map)['data'] as Map<String, dynamic>;
-      //
-      // var ccDataList = List<CCData>();
-      //
-      // allData.forEach((key, value) {
-      //   var record = CCData(name: value['name'], symbol: value['symbol'], rank: value['cmc_rank'], price: value['quote']['USD']['price']);
-      //   ccDataList.add(record);
-      // });
+      
 
       Map<String, dynamic> allData = json.decode(response.body);
       List<dynamic> ccData = allData["data"];

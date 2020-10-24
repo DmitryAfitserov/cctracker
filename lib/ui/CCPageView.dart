@@ -65,9 +65,9 @@ class PageViewState extends State<CCPageView>{
     dataPage2.clear();
     dataPage3.clear();
     snapshot.data.forEach((element) {
-        if(element.price < 100){
+        if(element.price < 10){
           dataPage1.add(element);
-        } else if(element.price >= 100 && element.price < 1000){
+        } else if(element.price >= 10 && element.price < 100){
           dataPage2.add(element);
         } else {
           dataPage3.add(element);
@@ -78,9 +78,9 @@ class PageViewState extends State<CCPageView>{
       controller: pageController,
 
       children: [
-        CCList(dataPage1), //LESS 100 $
-        CCList(dataPage2), // FROM $ 100 TO $ 1000
-        CCList(dataPage3) //FROM $ 1000
+        CCList(dataPage1), //LESS 10 $
+        CCList(dataPage2), // FROM $ 10 TO $ 100
+        CCList(dataPage3) //FROM $ 100
 
 
       ],

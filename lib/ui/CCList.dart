@@ -51,9 +51,6 @@ class CCList extends StatefulWidget{
 
       print(Text("main Widget build ------ ok"));
       return Scaffold(
-          appBar: AppBar(
-            title: Text("CC Tracker moyt"),
-          ),
 
         body: buildList()
 

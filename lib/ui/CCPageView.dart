@@ -27,9 +27,6 @@ class PageViewState extends State<CCPageView> with SingleTickerProviderStateMixi
   var currentPage = 0;
   var isPageCanChanged = true;
 
-  PageController pageController = PageController(
-    initialPage: 0
-  );
 
 
   @override
@@ -52,9 +49,9 @@ class PageViewState extends State<CCPageView> with SingleTickerProviderStateMixi
 
   initTabData() {
     tabList = [
-      TabTitle('recommended', 10),
-      TabTitle('hotspot', 0),
-      TabTitle('Society', 1),
+      TabTitle('0-10\$'),
+      TabTitle('10-100\$'),
+      TabTitle('more 100\$'),
     ];
   }
 
@@ -76,9 +73,21 @@ class PageViewState extends State<CCPageView> with SingleTickerProviderStateMixi
       return Scaffold(
         appBar: AppBar(
           title: Text("CC Tracker"),
-        ),
-        body:  createBodyWithTabBar(),
+          bottom: TabBar(
 
+            //  isScrollable: true,
+              controller: mTabController,
+
+              tabs: tabList.map((item) {
+                return Tab(
+                  text: item.title,
+                );
+              }).toList()
+
+
+          ),
+        ),
+        body:  createStreamBuilder(),
 
           floatingActionButton: FloatingActionButton(
               child: Icon(Icons.refresh),
@@ -89,34 +98,39 @@ class PageViewState extends State<CCPageView> with SingleTickerProviderStateMixi
       );
   }
 
-  Widget createBodyWithTabBar(){
-    return Column(
-      children:  [
-        Container(
-          height: 38.0,
-          color: new Color(0xfff4f5f6),
-          child: TabBar(
-            isScrollable: true,
-            controller: mTabController,
-            labelColor: Colors.red,
-            unselectedLabelColor: Color(0xff666666),
-            labelStyle: TextStyle(fontSize: 16.0),
-              tabs: tabList.map((item) {
-                return Tab(
-                  text: item.title,
-                );
-              }).toList()
-
-
-          ),
-        ),
-        Expanded(
-            child: createPageView()
-        )
-      ],
-    );
-
-  }
+  // Widget createBodyWithTabBar(){
+  //   return Column(
+  //     children:  [
+  //       Container(
+  //         //height: 40.0,
+  //        // color: new Color(0xfff4f5f6),
+  //
+  //          child:  TabBar(
+  //           isScrollable: true,
+  //           controller: mTabController,
+  //
+  //           labelColor: Colors.red,
+  //           unselectedLabelColor: Color(0xff666666),
+  //           labelStyle: TextStyle(fontSize: 16.0),
+  //             tabs: tabList.map((item) {
+  //               return Tab(
+  //                 text: item.title,
+  //               );
+  //             }).toList()
+  //
+  //
+  //         ),
+  //
+  //
+  //
+  //       ),
+  //       Expanded(
+  //           child: createStreamBuilder()
+  //       )
+  //     ],
+  //   );
+  //
+  // }
 
   Widget createStreamBuilder(){
     return StreamBuilder(
@@ -126,8 +140,8 @@ class PageViewState extends State<CCPageView> with SingleTickerProviderStateMixi
           //  if(snapshot.data.isNotEmpty){
           print(Text("snapshot.hasData ------ ok"));
 
-          return createPageView();
-        //  return createPageView(snapshot);
+         // return createPageView();
+          return createPageView(snapshot);
           //  }
 
         } else if (snapshot.hasError) {
@@ -141,44 +155,54 @@ class PageViewState extends State<CCPageView> with SingleTickerProviderStateMixi
 
 
 
- // Widget createPageView(AsyncSnapshot<List<CCData>> snapshot) {
-  Widget createPageView() {
+  Widget createPageView(AsyncSnapshot<List<CCData>> snapshot) {
+ // Widget createPageView() {
     dataPage1.clear();
     dataPage2.clear();
     dataPage3.clear();
-    // snapshot.data.forEach((element) {
-    //     if(element.price < 10){
-    //       dataPage1.add(element);
-    //     } else if(element.price >= 10 && element.price < 100){
-    //       dataPage2.add(element);
-    //     } else {
-    //       dataPage3.add(element);
-    //     }
-    // });
+    snapshot.data.forEach((element) {
+        if(element.price < 10){
+          dataPage1.add(element);
+        } else if(element.price >= 10 && element.price < 100){
+          dataPage2.add(element);
+        } else {
+          dataPage3.add(element);
+        }
+    });
 
-    // return PageView(
-    //     //  // controller: pageController,
-    //     //
-    //     //   children: [
-    //     //     CCList(dataPage1), //LESS 10 $
-    //     //     CCList(dataPage2), // FROM $ 10 TO $ 100
-    //     //     CCList(dataPage3) //FROM $ 100
-    // ],
-    // );
-
-    return PageView.builder(
-      itemCount: tabList.length,
+    return PageView(
+         // controller: pageController,
+      controller: mPageController,
       onPageChanged: (index) {
         if (isPageCanChanged) { // because the pageview switch will call back this method, it will trigger the switch tabbar operation, so define a flag, control pageview callback
           onPageChange(index);
         }
       },
-      controller: mPageController,
-      itemBuilder: (BuildContext context, int index) {
-        return Text(tabList[index].title);
-      },
+          children: [
+            CCList(dataPage1), //LESS 10 $
+            CCList(dataPage2), // FROM $ 10 TO $ 100
+            CCList(dataPage3) //FROM $ 100
+    ],
     );
 
+    // return PageView.builder(
+    //   itemCount: tabList.length,
+    //   onPageChanged: (index) {
+    //     if (isPageCanChanged) { // because the pageview switch will call back this method, it will trigger the switch tabbar operation, so define a flag, control pageview callback
+    //       onPageChange(index);
+    //     }
+    //   },
+    //   controller: mPageController,
+    //   itemBuilder: (BuildContext context, int index) {
+    //
+    //     return  ;
+    //     //   children: [
+    //     // CCList(dataPage1), //LESS 10 $
+    //     // CCList(dataPage2), // FROM $ 10 TO $ 100
+    //     // CCList(dataPage3) //FROM $ 100
+    //     // ];
+    //   },
+    // );
 
 
   }
@@ -187,7 +211,6 @@ class PageViewState extends State<CCPageView> with SingleTickerProviderStateMixi
 
 class TabTitle {
   String title;
-  int id;
 
-  TabTitle(this.title, this.id);
+  TabTitle(this.title);
 }

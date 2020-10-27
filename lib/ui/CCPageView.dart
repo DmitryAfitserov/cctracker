@@ -65,6 +65,7 @@ class CCPageViewState extends State<CCPageVIew> with SingleTickerProviderStateMi
 
   @override
   Widget build(BuildContext context) {
+    bloc.fetch();
     return Scaffold(
         appBar: AppBar(
           title: Text("CC Tracker"),
@@ -104,7 +105,7 @@ class CCPageViewState extends State<CCPageVIew> with SingleTickerProviderStateMi
           print(Text("snapshot.hasData ------ ok"));
 
           return createPageView(snapshot);
-          
+
         } else if (snapshot.hasError) {
           print(Text("snapshot.hasData ------ error -----   " + snapshot.error.toString()));
           return Text(snapshot.error.toString());

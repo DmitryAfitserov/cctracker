@@ -1,3 +1,4 @@
+import 'package:cctracker/ui/CCPageView.dart';
 import 'package:cctracker/ui/SettingsStateBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -20,7 +21,7 @@ class HomeStateBarState extends State<HomeStateBar>{
 
   int currentIndexBottomBar = 0;
   final List<Widget> childrenStates = [
-    HomeStateBar(),
+    CCPageVIew(),
     SettingsStateBar(),
   ];
 
@@ -32,10 +33,7 @@ class HomeStateBarState extends State<HomeStateBar>{
   Widget build(BuildContext context) {
 
       return Scaffold(
-        appBar: AppBar(
-          title: Text("CC Tracker"),
 
-        ),
         body:
           childrenStates[currentIndexBottomBar],
           bottomNavigationBar: BottomNavigationBar(

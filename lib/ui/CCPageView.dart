@@ -2,6 +2,8 @@ import 'package:cctracker/models/CCData.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cctracker/bloc/Bloc.dart';
+import 'package:cctracker/ui/CCList.dart';
 
 class CCPageVIew extends StatefulWidget{
 
@@ -43,9 +45,9 @@ class CCPageViewState extends State<CCPageVIew> with SingleTickerProviderStateMi
 
   initTabData() {
     tabList = [
-      TabTitle('0-10\$'),
-      TabTitle('10-100\$'),
-      TabTitle('more 100\$'),
+      '0-10\$',
+      '10-100\$',
+      'more 100\$',
     ];
   }
 
@@ -73,7 +75,7 @@ class CCPageViewState extends State<CCPageVIew> with SingleTickerProviderStateMi
 
               tabs: tabList.map((item) {
                 return Tab(
-                  text: item.title,
+                  text: item,
                 );
               }).toList()
 
@@ -82,25 +84,7 @@ class CCPageViewState extends State<CCPageVIew> with SingleTickerProviderStateMi
         ),
         body:  createStreamBuilder(),
         //  _children[currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Settings',
-            ),
 
-          ],
-          currentIndex: currentIndexBottomBar,
-          backgroundColor: Colors.blue,
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.white.withOpacity(.60),
-
-          onTap: onTabTapped,
-        ),
 
         floatingActionButton: FloatingActionButton(
             child: Icon(Icons.refresh),

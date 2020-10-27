@@ -1,9 +1,7 @@
-
-import 'file:///C:/Users/Dmitry/AndroidStudioProjects/cctracker/lib/ui/CCList.dart';
 import 'package:cctracker/ui/SettingsStateBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:cctracker/bloc/Bloc.dart';
+
 
 class HomeStateBar extends StatefulWidget {
 
@@ -32,7 +30,6 @@ class HomeStateBarState extends State<HomeStateBar>{
 
   @override
   Widget build(BuildContext context) {
-      bloc.fetch();
 
       return Scaffold(
         appBar: AppBar(

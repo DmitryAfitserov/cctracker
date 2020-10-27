@@ -1,20 +1,19 @@
 import 'package:cctracker/models/CCData.dart';
-import 'file:///C:/Users/Dmitry/AndroidStudioProjects/cctracker/lib/ui/CCList.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:cctracker/bloc/Bloc.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-class CCPageView extends StatefulWidget {
-
+class CCPageVIew extends StatefulWidget{
 
 
   @override
   State createState() {
-    return PageViewState();
+    return CCPageViewState();
   }
 }
 
-class PageViewState extends State<CCPageView> with SingleTickerProviderStateMixin{
+class CCPageViewState extends State<CCPageVIew> with SingleTickerProviderStateMixin{
+
 
   List<CCData> dataPage1 = [];
   List<CCData> dataPage2 = [];
@@ -22,12 +21,8 @@ class PageViewState extends State<CCPageView> with SingleTickerProviderStateMixi
 
   TabController mTabController;
   PageController mPageController = PageController(initialPage: 0);
-  List<TabTitle> tabList;
-
-  var currentPage = 0;
+  List<String> tabList;
   var isPageCanChanged = true;
-
-
 
   @override
   void initState() {
@@ -37,11 +32,10 @@ class PageViewState extends State<CCPageView> with SingleTickerProviderStateMixi
       length: tabList.length,
       vsync: this,
     );
-
     mTabController.addListener(() {//TabBar listener
       if (mTabController.indexIsChanging) { // determine whether TabBar switches
-      print(mTabController.index);
-      onPageChange(mTabController.index, p: mPageController);
+        print(mTabController.index);
+        onPageChange(mTabController.index, p: mPageController);
       }
     });
 
@@ -61,16 +55,15 @@ class PageViewState extends State<CCPageView> with SingleTickerProviderStateMixi
       await mPageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);//Wait for pageview to switch, then release pageivew listener
       isPageCanChanged = true;
     } else {
-    mTabController.animateTo(index); //Switch Tabbar
+      mTabController.animateTo(index); //Switch Tabbar
     }
+
   }
 
 
   @override
   Widget build(BuildContext context) {
-      bloc.fetch();
-
-      return Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text("CC Tracker"),
           bottom: TabBar(
@@ -88,49 +81,35 @@ class PageViewState extends State<CCPageView> with SingleTickerProviderStateMixi
           ),
         ),
         body:  createStreamBuilder(),
+        //  _children[currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Settings',
+            ),
 
-          floatingActionButton: FloatingActionButton(
-              child: Icon(Icons.refresh),
-              onPressed: () => bloc.fetch()
-          )
+          ],
+          currentIndex: currentIndexBottomBar,
+          backgroundColor: Colors.blue,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.white.withOpacity(.60),
+
+          onTap: onTabTapped,
+        ),
+
+        floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.refresh),
+            onPressed: () => bloc.fetch()
+        )
 
 
-      );
+    );
   }
-
-  // Widget createBodyWithTabBar(){
-  //   return Column(
-  //     children:  [
-  //       Container(
-  //         //height: 40.0,
-  //        // color: new Color(0xfff4f5f6),
-  //
-  //          child:  TabBar(
-  //           isScrollable: true,
-  //           controller: mTabController,
-  //
-  //           labelColor: Colors.red,
-  //           unselectedLabelColor: Color(0xff666666),
-  //           labelStyle: TextStyle(fontSize: 16.0),
-  //             tabs: tabList.map((item) {
-  //               return Tab(
-  //                 text: item.title,
-  //               );
-  //             }).toList()
-  //
-  //
-  //         ),
-  //
-  //
-  //
-  //       ),
-  //       Expanded(
-  //           child: createStreamBuilder()
-  //       )
-  //     ],
-  //   );
-  //
-  // }
 
   Widget createStreamBuilder(){
     return StreamBuilder(
@@ -140,7 +119,7 @@ class PageViewState extends State<CCPageView> with SingleTickerProviderStateMixi
           //  if(snapshot.data.isNotEmpty){
           print(Text("snapshot.hasData ------ ok"));
 
-         // return createPageView();
+          // return createPageView();
           return createPageView(snapshot);
           //  }
 
@@ -153,37 +132,35 @@ class PageViewState extends State<CCPageView> with SingleTickerProviderStateMixi
     );
   }
 
-
-
   Widget createPageView(AsyncSnapshot<List<CCData>> snapshot) {
     print(Text("createPageView ------ ok"));
- // Widget createPageView() {
+    // Widget createPageView() {
     dataPage1.clear();
     dataPage2.clear();
     dataPage3.clear();
     snapshot.data.forEach((element) {
-        if(element.price < 10){
-          dataPage1.add(element);
-        } else if(element.price >= 10 && element.price < 100){
-          dataPage2.add(element);
-        } else {
-          dataPage3.add(element);
-        }
+      if(element.price < 10){
+        dataPage1.add(element);
+      } else if(element.price >= 10 && element.price < 100){
+        dataPage2.add(element);
+      } else {
+        dataPage3.add(element);
+      }
     });
 
     return PageView(
-         // controller: pageController,
+      // controller: pageController,
       controller: mPageController,
       onPageChanged: (index) {
         if (isPageCanChanged) { // because the pageview switch will call back this method, it will trigger the switch tabbar operation, so define a flag, control pageview callback
           onPageChange(index);
         }
       },
-          children: [
-            CCList(dataPage1), //LESS 10 $
-            CCList(dataPage2), // FROM $ 10 TO $ 100
-            CCList(dataPage3) //FROM $ 100
-    ],
+      children: [
+        CCList(dataPage1), //LESS 10 $
+        CCList(dataPage2), // FROM $ 10 TO $ 100
+        CCList(dataPage3) //FROM $ 100
+      ],
     );
 
     // return PageView.builder(
@@ -207,11 +184,5 @@ class PageViewState extends State<CCPageView> with SingleTickerProviderStateMixi
 
 
   }
-}
 
-
-class TabTitle {
-  String title;
-
-  TabTitle(this.title);
 }

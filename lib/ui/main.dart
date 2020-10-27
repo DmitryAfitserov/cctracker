@@ -1,5 +1,5 @@
 import 'file:///C:/Users/Dmitry/AndroidStudioProjects/cctracker/lib/ui/CCList.dart';
-import 'file:///C:/Users/Dmitry/AndroidStudioProjects/cctracker/lib/ui/CCPageView.dart';
+import 'file:///C:/Users/Dmitry/AndroidStudioProjects/cctracker/lib/ui/HomeStateBar.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(CCTracker());

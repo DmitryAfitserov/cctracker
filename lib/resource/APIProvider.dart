@@ -13,7 +13,7 @@ class APIProvider {
     if(response.statusCode == 200){
       print(response.body);
 
-      
+
 
       Map<String, dynamic> allData = json.decode(response.body);
       List<dynamic> ccData = allData["data"];

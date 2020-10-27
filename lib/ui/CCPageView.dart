@@ -156,6 +156,7 @@ class PageViewState extends State<CCPageView> with SingleTickerProviderStateMixi
 
 
   Widget createPageView(AsyncSnapshot<List<CCData>> snapshot) {
+    print(Text("createPageView ------ ok"));
  // Widget createPageView() {
     dataPage1.clear();
     dataPage2.clear();

@@ -100,13 +100,11 @@ class CCPageViewState extends State<CCPageVIew> with SingleTickerProviderStateMi
       stream: bloc.allMovies,
       builder: (context, AsyncSnapshot<List<CCData>> snapshot) {
         if (snapshot.hasData) {
-          //  if(snapshot.data.isNotEmpty){
+
           print(Text("snapshot.hasData ------ ok"));
 
-          // return createPageView();
           return createPageView(snapshot);
-          //  }
-
+          
         } else if (snapshot.hasError) {
           print(Text("snapshot.hasData ------ error -----   " + snapshot.error.toString()));
           return Text(snapshot.error.toString());

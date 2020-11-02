@@ -16,9 +16,6 @@ class CCBottomNavigationBar extends StatefulWidget {
 
 class CCBottomNavigationBarState extends State<CCBottomNavigationBar>{
 
-
-
-
   int currentIndexBottomBar = 0;
   final List<Widget> childrenStates = [
     PageVIewStateBar(),

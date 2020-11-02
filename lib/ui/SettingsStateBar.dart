@@ -22,7 +22,24 @@ class SettingsStateBarState extends State<SettingsStateBar>{
           title: Text("CC Tracker"),
 
         ),
-        body: Text("Settings")
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/background_setting.jpg"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Column(
+              children: [
+                Text("Settings")
+
+              ],
+            ),
+          )
+        ),
+
     );
   }
 }

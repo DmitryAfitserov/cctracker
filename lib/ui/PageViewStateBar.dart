@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:cctracker/bloc/Bloc.dart';
 import 'package:cctracker/ui/CCList.dart';
 
-class CCPageVIew extends StatefulWidget{
+class PageVIewStateBar extends StatefulWidget{
 
 
   @override
   State createState() {
-    return CCPageViewState();
+    return PageVIewStateBarState();
   }
 }
 
-class CCPageViewState extends State<CCPageVIew> with SingleTickerProviderStateMixin{
+class PageVIewStateBarState extends State<PageVIewStateBar> with SingleTickerProviderStateMixin{
 
 
   List<CCData> dataPage1 = [];

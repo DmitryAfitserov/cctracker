@@ -1,27 +1,27 @@
-import 'package:cctracker/ui/CCPageView.dart';
+import 'package:cctracker/ui/PageViewStateBar.dart';
 import 'package:cctracker/ui/SettingsStateBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 
-class HomeStateBar extends StatefulWidget {
+class CCBottomNavigationBar extends StatefulWidget {
 
 
 
   @override
   State createState() {
-    return HomeStateBarState();
+    return CCBottomNavigationBarState();
   }
 }
 
-class HomeStateBarState extends State<HomeStateBar>{
+class CCBottomNavigationBarState extends State<CCBottomNavigationBar>{
 
 
 
 
   int currentIndexBottomBar = 0;
   final List<Widget> childrenStates = [
-    CCPageVIew(),
+    PageVIewStateBar(),
     SettingsStateBar(),
   ];
 

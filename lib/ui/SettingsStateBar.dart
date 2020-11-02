@@ -17,8 +17,12 @@ class SettingsStateBarState extends State<SettingsStateBar>{
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("CC Tracker"),
+
+        ),
+        body: Text("Settings")
     );
   }
 }

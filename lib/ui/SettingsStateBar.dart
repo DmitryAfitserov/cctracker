@@ -23,7 +23,6 @@ class SettingsStateBarState extends State<SettingsStateBar>{
       "tab 3",
       "tab 4",
       "tab 5",
-
     ];
 
     return Scaffold(
@@ -41,13 +40,13 @@ class SettingsStateBarState extends State<SettingsStateBar>{
           child: Scaffold(
             backgroundColor: Colors.transparent,
             body: Container(
-              margin: EdgeInsets.all(15),
+              margin: EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
 
                 children: [
-                  Container(margin: EdgeInsets.fromLTRB(10, 20, 15, 0), child:
-                  Text("Settigs", style: TextStyle(color: Colors.blue, fontSize: 20),)
+                  Container(margin: EdgeInsets.fromLTRB(15, 20, 15, 0), child:
+                  Text("Settings", style: TextStyle(color: Colors.blue, fontSize: 20, fontWeight: FontWeight.bold), )
                     ,),
                   Container(
                     height: 360,
@@ -60,7 +59,8 @@ class SettingsStateBarState extends State<SettingsStateBar>{
                         padding: EdgeInsets.all(2.0),
                         itemBuilder: (context, index) {
                           return ListTile(
-                            title: Text(_listViewData[index]),
+                            title: Text(_listViewData[index], style: TextStyle(color: Colors.indigo, fontSize: 18, fontWeight: FontWeight.bold),),
+                            onTap: () => onTapList(index),
                           );
                         },
                         separatorBuilder: (context, index) {
@@ -77,12 +77,16 @@ class SettingsStateBarState extends State<SettingsStateBar>{
               ),
             )
 
-              
+
 
           )
         ),
 
     );
+  }
+  
+  void onTapList(int position){
+    print(Text("position =  $position "));
   }
 }
 

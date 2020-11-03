@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cctracker/bloc/Bloc.dart';
 
-
 class CCList extends StatefulWidget{
 
   final List<CCData> data;

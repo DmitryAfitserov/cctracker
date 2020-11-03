@@ -5,5 +5,4 @@ class Repository {
   final apiProvider = APIProvider();
 
   Future<List<CCData>> fetch() => apiProvider.loadCC();
-
 }

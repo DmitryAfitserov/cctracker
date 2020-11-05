@@ -20,7 +20,7 @@ class ItemSetting extends StatelessWidget {
       color: Colors.white,
       onPressed: () => onPressed(),
       child: Container(
-        padding: EdgeInsets.all(18),
+        padding: EdgeInsets.all(14),
         decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.black12)),
         ),

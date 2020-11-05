@@ -15,11 +15,13 @@ class SettingsStateBarState extends State<SettingsStateBar> {
   static const platform = const MethodChannel("com.my.flutter/epic");
 
   List<String> _listViewData = [
-    "tab 1",
-    "tab 2",
-    "tab 3",
-    "tab 4",
-    "tab 5",
+    "О приложении",
+    "Помощь",
+    "Связаться с нами",
+    "Поделиться приложением",
+    "Условия пользования",
+    "Политика конфиденциальности",
+    "Оценить приложение",
   ];
 
   @override
@@ -45,7 +47,7 @@ class SettingsStateBarState extends State<SettingsStateBar> {
                     Container(
                       margin: EdgeInsets.fromLTRB(15, 20, 15, 0),
                       child: Text(
-                        "Settings",
+                        "Настройки",
                         style: TextStyle(
                             color: Colors.blue,
                             fontSize: 20,
@@ -54,7 +56,7 @@ class SettingsStateBarState extends State<SettingsStateBar> {
                     ),
 
                     Card(
-                        elevation: 3.0,
+                        elevation: 4.0,
                         child: Column(
                           children: [
                             ItemSetting(
@@ -76,6 +78,14 @@ class SettingsStateBarState extends State<SettingsStateBar> {
                             ItemSetting(
                               onPressed: () => onTapList(4),
                               title: _listViewData[4],
+                            ),
+                            ItemSetting(
+                              onPressed: () => onTapList(5),
+                              title: _listViewData[5],
+                            ),
+                            ItemSetting(
+                              onPressed: () => onTapList(6),
+                              title: _listViewData[6],
                             ),
                           ],
                         )),
@@ -101,8 +111,6 @@ class SettingsStateBarState extends State<SettingsStateBar> {
     }
 
     print(value);
-
-
   }
 
 }

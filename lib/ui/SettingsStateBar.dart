@@ -111,23 +111,23 @@ class SettingsStateBarState extends State<SettingsStateBar> {
         break;
       }
       case 2: {
-
+        doInKotlin("feedback");
         break;
       }
       case 3: {
-
+        doInKotlin("shareApp");
         break;
       }
       case 4: {
-
+        doInKotlin("termsOfUse");
         break;
       }
       case 5: {
-
+        doInKotlin("privacyPolicy");
         break;
       }
       case 6: {
-
+        doInKotlin("rateApp");
         break;
       }
 

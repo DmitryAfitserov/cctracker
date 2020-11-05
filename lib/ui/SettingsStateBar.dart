@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 import 'package:cctracker/ui/widget/ItemSetting.dart';
 
 class SettingsStateBar extends StatefulWidget {
@@ -10,6 +11,9 @@ class SettingsStateBar extends StatefulWidget {
 }
 
 class SettingsStateBarState extends State<SettingsStateBar> {
+
+  static const platform = const MethodChannel("com.my.flutter/epic");
+
   List<String> _listViewData = [
     "tab 1",
     "tab 2",
@@ -84,5 +88,21 @@ class SettingsStateBarState extends State<SettingsStateBar> {
 
   void onTapList(int position) {
     print(Text("position =  $position "));
+    doInKotlin();
   }
+
+  void doInKotlin() async{
+    String value;
+
+    try {
+      value = await platform.invokeMethod("Printy");
+    } catch (e) {
+      print(e);
+    }
+
+    print(value);
+
+
+  }
+
 }

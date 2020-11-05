@@ -56,7 +56,9 @@ class SettingsStateBarState extends State<SettingsStateBar> {
                     ),
 
                     Card(
-                        elevation: 4.0,
+                        // shape: RoundedRectangleBorder(
+                        //   borderRadius: BorderRadius.circular(12.0),
+                        // ),
                         child: Column(
                           children: [
                             ItemSetting(
@@ -98,14 +100,48 @@ class SettingsStateBarState extends State<SettingsStateBar> {
 
   void onTapList(int position) {
     print(Text("position =  $position "));
-    doInKotlin();
+    switch (position){
+      case 0: {
+        print("case 0");
+        doInKotlin("aboutApp");
+        break;
+      }
+      case 1: {
+        doInKotlin("help");
+        break;
+      }
+      case 2: {
+
+        break;
+      }
+      case 3: {
+
+        break;
+      }
+      case 4: {
+
+        break;
+      }
+      case 5: {
+
+        break;
+      }
+      case 6: {
+
+        break;
+      }
+
+    }
+
+
   }
 
-  void doInKotlin() async{
+  void doInKotlin(String nameMethod) async{
+
     String value;
 
     try {
-      value = await platform.invokeMethod("Printy");
+      value = await platform.invokeMethod(nameMethod);
     } catch (e) {
       print(e);
     }

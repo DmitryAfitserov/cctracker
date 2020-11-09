@@ -47,7 +47,7 @@ class PhotosStateBarState extends State<PhotosStateBar> {
                 onPressed: () => onPressAddPhoto(),
                 padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16.0))),
+                    borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 elevation: 5,
                 color: Colors.blue,
                 textColor: Colors.white,

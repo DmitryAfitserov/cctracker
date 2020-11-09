@@ -18,7 +18,6 @@ class PhotosStateBarState extends State<PhotosStateBar> {
           title: Text("Photos"),
         ),
         body: Column(
-
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -26,12 +25,11 @@ class PhotosStateBarState extends State<PhotosStateBar> {
                 child: ListView.builder(
                     itemCount: 10,
                     itemBuilder: (BuildContext ctxt, int index) {
-                      return ItemPhoto(image: "tyty", title: "ytyty");
+                      return ItemPhoto(image: "assets/images/image_temp.jpg", title: "ytyty");
                     })),
             ButtonTheme(
               minWidth: 200,
               height: 42.0,
-
               child: RaisedButton(
                 child: Text(
                   "Add photo",

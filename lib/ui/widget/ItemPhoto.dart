@@ -16,15 +16,33 @@ class ItemPhoto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Card(
+      elevation: 4,
+      child: Row(
 
-      children: [
-        Text(title),
-        Text(image),
+        children: [
+          Container(
+            margin: EdgeInsets.all(8),
+            height: 110.0,
+            width: 152.0,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                    image),
+                fit: BoxFit.fitHeight,
+              ),
+              // shape: BoxShape.circle,
+            ),
+          ),
+          Text(title, style: TextStyle(fontSize: 16),),
 
-      ],
+        ],
+
+      ),
 
     );
+
+
 
 
 

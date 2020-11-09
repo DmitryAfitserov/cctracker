@@ -1,4 +1,5 @@
 import 'package:cctracker/ui/PageViewStateBar.dart';
+import 'package:cctracker/ui/PhotosStateBar.dart';
 import 'package:cctracker/ui/SettingsStateBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -14,6 +15,7 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar> {
   int currentIndexBottomBar = 0;
   final List<Widget> childrenStates = [
     PageVIewStateBar(),
+    PhotosStateBar(),
     SettingsStateBar(),
   ];
 
@@ -26,6 +28,10 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.photo),
+            label: 'Photos',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
@@ -46,39 +52,4 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar> {
       currentIndexBottomBar = index;
     });
   }
-
-// Widget createBodyWithTabBar(){
-//   return Column(
-//     children:  [
-//       Container(
-//         //height: 40.0,
-//        // color: new Color(0xfff4f5f6),
-//
-//          child:  TabBar(
-//           isScrollable: true,
-//           controller: mTabController,
-//
-//           labelColor: Colors.red,
-//           unselectedLabelColor: Color(0xff666666),
-//           labelStyle: TextStyle(fontSize: 16.0),
-//             tabs: tabList.map((item) {
-//               return Tab(
-//                 text: item.title,
-//               );
-//             }).toList()
-//
-//
-//         ),
-//
-//
-//
-//       ),
-//       Expanded(
-//           child: createStreamBuilder()
-//       )
-//     ],
-//   );
-//
-// }
-
 }

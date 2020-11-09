@@ -23,10 +23,17 @@ class PhotosStateBarState extends State<PhotosStateBar> {
           children: [
             Expanded(
                 child: ListView.builder(
-                    itemCount: 10,
-                    itemBuilder: (BuildContext ctxt, int index) {
-                      return ItemPhoto(image: "assets/images/image_temp.jpg", title: "ytyty");
-                    })),
+                  itemCount: 10,
+                  itemBuilder: (BuildContext ctxt, int index) {
+                    return ItemPhoto(
+                      image: "assets/images/image_temp.jpg",
+                        title: "title",
+                      callback: () => onPressItem(index),
+                    );
+
+
+                  },
+            )),
             ButtonTheme(
               minWidth: 200,
               height: 42.0,
@@ -46,6 +53,10 @@ class PhotosStateBarState extends State<PhotosStateBar> {
             )
           ],
         ));
+  }
+
+  void onPressItem(int position) {
+    print("On pressed item position $position");
   }
 
   void onPressAddPhoto() {

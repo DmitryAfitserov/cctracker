@@ -1,6 +1,7 @@
 import 'package:cctracker/ui/widget/ItemPhoto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class PhotosStateBar extends StatefulWidget {
   @override
@@ -10,9 +11,12 @@ class PhotosStateBar extends StatefulWidget {
 }
 
 class PhotosStateBarState extends State<PhotosStateBar> {
+
+  static const platform = const MethodChannel("com.my.flutter/epic");
+
   @override
   Widget build(BuildContext context) {
-    List<String> litems = ["1", "2", "3", "4"];
+   // List<String> litems = ["1", "2", "3", "4"];
     return Scaffold(
         appBar: AppBar(
           title: Text("Photos"),
@@ -30,8 +34,6 @@ class PhotosStateBarState extends State<PhotosStateBar> {
                         title: "title",
                       callback: () => onPressItem(index),
                     );
-
-
                   },
             )),
             ButtonTheme(
@@ -61,5 +63,19 @@ class PhotosStateBarState extends State<PhotosStateBar> {
 
   void onPressAddPhoto() {
     print("On pressed");
+    startActivityInKotlin();
+  }
+
+  void startActivityInKotlin() async{
+
+    String value;
+
+    try {
+      value = await platform.invokeMethod("activity_photo");
+    } catch (e) {
+      print(e);
+    }
+
+    print(value);
   }
 }

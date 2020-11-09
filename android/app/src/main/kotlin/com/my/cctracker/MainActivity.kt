@@ -43,6 +43,10 @@ class MainActivity: FlutterActivity() {
                     rateApp()
                     result.success("Kotlin OK rateApp")
                 }
+                "activity_photo" -> {
+                    result.success("Kotlin OK activity_photo")
+                    photoActivity()
+                }
                 else -> {
                     result.success("Kotlin OK, not action")
                 }
@@ -78,6 +82,12 @@ class MainActivity: FlutterActivity() {
     private fun helpActivity(){
         val intent = Intent(this, HelpActivity::class.java)
        // intent.putExtra("key", value)
+        startActivity(intent)
+    }
+
+    private fun photoActivity(){
+        val intent = Intent(this, PhotoActivity::class.java)
+        // intent.putExtra("key", value)
         startActivity(intent)
     }
 

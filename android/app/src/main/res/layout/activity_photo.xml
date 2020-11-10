@@ -2,20 +2,21 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="10dp"
-    >
-
-
+    android:background="@color/white">
 
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="300dp"
-        android:src="@drawable/image_placeholder"
         android:adjustViewBounds="true"
+        android:padding="1dp"
+        android:src="@drawable/image_placeholder"
+        android:background="@drawable/border_for_image"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -30,32 +31,33 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        tools:layout_editor_absoluteX="12dp">
+        tools:layout_editor_absoluteX="12dp"
+        android:background="@color/white"
+        >
 
         <Button
-            android:layout_weight="1"
+            android:id="@+id/button_photo"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button"
             android:text="Photo"
             android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_button"
-            android:layout_margin="4dp"/>
+            android:textColor="@color/white" />
 
         <Button
-            android:layout_weight="1"
+            android:id="@+id/button_gallery"
             android:layout_width="0dp"
-            android:text="Gallery"
-            android:textColor="@color/white"
-            android:textAllCaps="false"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_button"
             android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button"
+            android:text="Gallery"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
 
             />
-
-
-
 
 
     </LinearLayout>
@@ -65,22 +67,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="12dp">
+
+        android:background="@color/white"
+        >
 
         <Button
+            android:id="@+id/button_apply"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_button"
-            android:textAllCaps="false"
             android:layout_margin="4dp"
-            android:textColor="@color/white"
+            android:padding="16dp"
+            android:background="@drawable/shape_button"
             android:text="Apply"
+            android:textSize="32sp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+
             />
 
 
     </LinearLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

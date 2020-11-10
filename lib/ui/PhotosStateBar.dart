@@ -1,3 +1,4 @@
+import 'package:cctracker/ui/PhotoPlatformView.dart';
 import 'package:cctracker/ui/widget/ItemPhoto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,9 @@ class PhotosStateBarState extends State<PhotosStateBar> {
 
   void onPressAddPhoto() {
     print("On pressed");
-    startActivityInKotlin();
+   // startActivityInKotlin();
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => PhotoPlatformView()));
+  //  PhotoPlatformView();
   }
 
   void startActivityInKotlin() async{

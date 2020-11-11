@@ -2,8 +2,11 @@ package com.my.cctracker
 
 import android.app.Activity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 
 class PhotoActivity : AppCompatActivity() {
@@ -45,9 +48,29 @@ class PhotoActivity : AppCompatActivity() {
         galleryButton.setOnClickListener(clickListener)
         applyButton.setOnClickListener(clickListener)
 
+        var toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setActionBar(toolbar)
+
+        getSupportActionBar()!!.setHomeAsUpIndicator(R.mipmap.ic_launcher);// set drawable icon
+        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true);
 
     }
 
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.menu_photo, menu);
+//        return true
+//
+//    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                finish()
+            }
 
 
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
 }

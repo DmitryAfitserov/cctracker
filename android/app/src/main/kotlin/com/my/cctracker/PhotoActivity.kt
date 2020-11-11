@@ -18,13 +18,16 @@ class PhotoActivity : AppCompatActivity() {
 
             R.id.button_photo -> {
                 print("click button_photo")
+                photoButton.setText("photoButton")
 
             }
             R.id.button_gallery -> {
                 print("click button_gallery")
+                galleryButton.setText("galleryButton")
             }
             R.id.button_apply -> {
                 print("click button_apply")
+                applyButton.setText("applyButton")
             }
 
         }

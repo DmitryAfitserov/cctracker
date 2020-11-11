@@ -6,7 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:clickable="true"
+
+    >
 
 
     <ImageView
@@ -44,7 +49,10 @@
             android:background="@drawable/shape_button"
             android:text="Photo"
             android:textAllCaps="false"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:padding="10dp"
+            />
 
         <Button
             android:id="@+id/button_gallery"
@@ -56,7 +64,8 @@
             android:text="Gallery"
             android:textAllCaps="false"
             android:textColor="@color/white"
-
+            android:textSize="18sp"
+            android:padding="10dp"
             />
 
 
@@ -76,10 +85,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:padding="16dp"
+
             android:background="@drawable/shape_button"
             android:text="Apply"
-            android:textSize="32sp"
+            android:textSize="18sp"
+            android:padding="10dp"
             android:textAllCaps="false"
             android:textColor="@color/white"
 

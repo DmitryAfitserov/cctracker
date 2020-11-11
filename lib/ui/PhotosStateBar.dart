@@ -64,8 +64,8 @@ class PhotosStateBarState extends State<PhotosStateBar> {
 
   void onPressAddPhoto() {
     print("On pressed");
-   // startActivityInKotlin();
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => PhotoPlatformView()));
+    startActivityInKotlin();
+  //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => PhotoPlatformView()));
   //  PhotoPlatformView();
   }
 

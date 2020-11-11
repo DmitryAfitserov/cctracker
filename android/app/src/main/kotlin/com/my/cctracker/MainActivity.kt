@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import com.my.cctracker.singleton.Singleton
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
@@ -17,6 +18,7 @@ class MainActivity : FlutterActivity() {
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { methodCall, result ->
+            Singleton.mch = result
 
             when (methodCall.method) {
                 "aboutApp" -> {
@@ -46,7 +48,7 @@ class MainActivity : FlutterActivity() {
                     result.success("Kotlin OK rateApp")
                 }
                 "activity_photo" -> {
-                    result.success("Kotlin OK activity_photo")
+                 //   result.success("Kotlin OK activity_photo")
                     photoActivity()
                 }
                 else -> {
@@ -100,6 +102,7 @@ class MainActivity : FlutterActivity() {
 
     private fun helpActivity() {
         val intent = Intent(this, HelpActivity::class.java)
+
         // intent.putExtra("key", value)
         startActivity(intent)
     }

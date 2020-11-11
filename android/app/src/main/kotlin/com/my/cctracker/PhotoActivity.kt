@@ -1,13 +1,13 @@
 package com.my.cctracker
 
-import android.app.Activity
+
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
+import com.my.cctracker.singleton.Singleton
 
 class PhotoActivity : AppCompatActivity() {
 
@@ -65,6 +65,7 @@ class PhotoActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             android.R.id.home -> {
+                Singleton.mch?.success("back_without_save")
                 finish()
             }
 

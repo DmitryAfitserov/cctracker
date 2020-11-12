@@ -69,7 +69,7 @@ class PhotoActivity : AppCompatActivity() {
         var toolbar = findViewById<Toolbar>(R.id.toolbar)
         setActionBar(toolbar)
 
-        getSupportActionBar()!!.setHomeAsUpIndicator(R.drawable.button_back_v1)
+        getSupportActionBar()!!.setHomeAsUpIndicator(R.drawable.button_back_v4)
         getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true)
 
         Log.d("EEE", "on Create ---- OK")

@@ -15,10 +15,11 @@
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/image_view_photo"
         android:layout_width="0dp"
         android:layout_height="300dp"
         android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
         android:padding="1dp"
         android:src="@drawable/image_placeholder"
         android:background="@drawable/border_for_image"

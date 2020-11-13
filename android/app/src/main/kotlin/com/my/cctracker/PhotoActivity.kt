@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.my.cctracker.singleton.Singleton
+import org.json.JSONObject
 
 
 class PhotoActivity : AppCompatActivity() {
@@ -35,7 +36,8 @@ class PhotoActivity : AppCompatActivity() {
     lateinit var textInputLayout: TextInputLayout
     lateinit var textInputEditText: TextInputEditText
 
-    private var isPhotoInImageView = false
+
+    private var uriString = ""
 
     private val clickListener = View.OnClickListener { view ->
 
@@ -81,9 +83,8 @@ class PhotoActivity : AppCompatActivity() {
     }
 
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             android.R.id.home -> {
                 Singleton.mch?.success("back_without_save")
                 finish()
@@ -93,8 +94,8 @@ class PhotoActivity : AppCompatActivity() {
     }
 
 
-    private fun getPhotoFromGallery(){
-        if(checkPermissionForImage(PERMISSION_CODE_GALLERY)){
+    private fun getPhotoFromGallery() {
+        if (checkPermissionForImage(PERMISSION_CODE_GALLERY)) {
 
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
@@ -105,14 +106,14 @@ class PhotoActivity : AppCompatActivity() {
 
     private fun launchCamera() {
 
-        if(checkPermissionForImage(PERMISSION_CODE_CAMERA)){
+        if (checkPermissionForImage(PERMISSION_CODE_CAMERA)) {
             val values = ContentValues(1)
             values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")
             val fileUri = contentResolver
                     .insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                             values)
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            if(intent.resolveActivity(packageManager) != null) {
+            if (intent.resolveActivity(packageManager) != null) {
                 mCurrentPhotoPath = fileUri!!
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri)
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
@@ -124,26 +125,29 @@ class PhotoActivity : AppCompatActivity() {
     }
 
 
-    private fun returnToFlutter(){
-        if(checkIsNotEmptyData()){
+    private fun returnToFlutter() {
+        if (checkIsNotEmptyData()) {
+            val jsonObject = JSONObject()
+            jsonObject.put("title", textInputLayout.editText?.text!!.toString())
+            jsonObject.put("image", uriString)
 
-            // prepare data and finish
-
+            Singleton.mch?.success(jsonObject.toString())
+            finish()
         }
     }
 
-    private fun checkIsNotEmptyData(): Boolean{
-        if(!isPhotoInImageView){
+    private fun checkIsNotEmptyData(): Boolean {
+        if (uriString.isEmpty()) {
             Log.d("EEE", "if(!isPhotoInImageView)")
             // toast
             Toast.makeText(applicationContext, "You need to add a photo", Toast.LENGTH_SHORT).show()
             imageView.setBackgroundResource(R.drawable.border_for_image_error)
         }
-        if(textInputLayout.editText?.text!!.isEmpty()){
+        if (textInputLayout.editText?.text!!.isEmpty()) {
             textInputEditText.error = "You need to input a title"
         }
 
-        if(isPhotoInImageView && textInputLayout.editText?.text!!.isNotEmpty()){
+        if (uriString.isNotEmpty() && textInputLayout.editText?.text!!.isNotEmpty()) {
             return true
         }
         return false
@@ -151,18 +155,13 @@ class PhotoActivity : AppCompatActivity() {
     }
 
 
-    private fun checkPermissionForImage(p_c_r: Int) :Boolean {
+    private fun checkPermissionForImage(p_c_r: Int): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if ((checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
                     && (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
             ) {
                 val permission = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                val permissionCoarse = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-
-
                 requestPermissions(permission, p_c_r)
-
-
                 return false
             } else {
                 return true
@@ -178,11 +177,12 @@ class PhotoActivity : AppCompatActivity() {
 
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
             imageView.setImageURI(data?.data)
-            isPhotoInImageView = true
-        }
-        else if (resultCode == Activity.RESULT_OK && requestCode == TAKE_PHOTO_REQUEST) {
+            uriString = data?.data.toString()
+
+        } else if (resultCode == Activity.RESULT_OK && requestCode == TAKE_PHOTO_REQUEST) {
             imageView.setImageURI(mCurrentPhotoPath)
-            isPhotoInImageView = true
+            uriString = mCurrentPhotoPath.toString()
+
         }
     }
 
@@ -193,16 +193,12 @@ class PhotoActivity : AppCompatActivity() {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getPhotoFromGallery()
             }
-        }
-        else if (requestCode == PERMISSION_CODE_CAMERA) {
+        } else if (requestCode == PERMISSION_CODE_CAMERA) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 launchCamera()
             }
         }
     }
-
-
-
 
 
 }

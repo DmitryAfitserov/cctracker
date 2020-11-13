@@ -78,7 +78,7 @@ class PhotosStateBarState extends State<PhotosStateBar> {
     } catch (e) {
       print(e);
     }
-
+// {"title":"Рлл","image":"content:\/\/media\/external\/images\/media\/20305"}
     print(value);
   }
 }

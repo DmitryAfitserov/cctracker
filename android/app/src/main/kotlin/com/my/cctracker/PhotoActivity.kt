@@ -14,9 +14,12 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.my.cctracker.singleton.Singleton
 
 
@@ -32,6 +35,10 @@ class PhotoActivity : AppCompatActivity() {
     lateinit var galleryButton: Button
     lateinit var applyButton: Button
     lateinit var imageView: ImageView
+    lateinit var textInputLayout: TextInputLayout
+    lateinit var textInputEditText: TextInputEditText
+
+    private var isPhotoInImageView = false
 
     private val clickListener = View.OnClickListener { view ->
 
@@ -44,8 +51,7 @@ class PhotoActivity : AppCompatActivity() {
                 getPhotoFromGallery()
             }
             R.id.button_apply -> {
-                Singleton.mch?.success("back_without_save")
-                finish()
+                returnToFlutter()
             }
         }
 
@@ -59,6 +65,9 @@ class PhotoActivity : AppCompatActivity() {
         applyButton = findViewById(R.id.button_apply)
 
         imageView = findViewById(R.id.image_view_photo)
+
+        textInputLayout = findViewById(R.id.text_input_layout)
+        textInputEditText = findViewById(R.id.edit_text)
 
         photoButton.setOnClickListener(clickListener)
         galleryButton.setOnClickListener(clickListener)
@@ -74,11 +83,6 @@ class PhotoActivity : AppCompatActivity() {
 
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.menu_photo, menu);
-//        return true
-//
-//    }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -123,6 +127,33 @@ class PhotoActivity : AppCompatActivity() {
     }
 
 
+    private fun returnToFlutter(){
+        if(checkIsNotEmptyData()){
+
+            // prepare data and finish
+
+        }
+    }
+
+    private fun checkIsNotEmptyData(): Boolean{
+        if(!isPhotoInImageView){
+            Log.d("EEE", "if(!isPhotoInImageView)")
+            // toast
+
+        }
+        if(textInputLayout.editText?.text!!.isEmpty()){
+            textInputEditText.error = "You need to enter a title"
+        }
+
+        if(isPhotoInImageView && textInputLayout.editText?.text!!.isNotEmpty()){
+            Log.d("EEE", "all is OK ---- OK")
+            return true
+        }
+        return false
+
+    }
+
+
     private fun checkPermissionForImage(p_c_r: Int) :Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if ((checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
@@ -150,25 +181,24 @@ class PhotoActivity : AppCompatActivity() {
 
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
             imageView.setImageURI(data?.data)
+            isPhotoInImageView = true
         }
         else if (resultCode == Activity.RESULT_OK && requestCode == TAKE_PHOTO_REQUEST) {
             imageView.setImageURI(mCurrentPhotoPath)
+            isPhotoInImageView = true
         }
     }
 
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-      //  super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        Log.d("EEE", "onRequestPermissionsResult ---- body")
+
         if (requestCode == PERMISSION_CODE_GALLERY) {
-            Log.d("EEE", "PERMISSION_CODE_READ_GALLERY ---- body")
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.d("EEE", "PERMISSION_CODE_READ_GALLERY PERMISSION_GRANTED ---- body")
                 getPhotoFromGallery()
             }
-        } else if (requestCode == PERMISSION_CODE_CAMERA) {
-            Log.d("EEE", "PERMISSION_CODE_WRITE_CAMERA ---- body")
+        }
+        else if (requestCode == PERMISSION_CODE_CAMERA) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.d("EEE", "PERMISSION_CODE_WRITE_CAMERA PERMISSION_GRANTED ---- body")
                 launchCamera()
             }
         }

@@ -28,7 +28,7 @@ class Bloc {
   }
 
   addPhoto(String jsonString) async {
-    await _repository.addPhoto();
+    await _repository.addPhoto(jsonString);
   //  _fetcherPhoto.sink.add(listPhoto);
   }
 

@@ -5,5 +5,5 @@ class PhotoData {
   String path;
 
 
-  PhotoData({this.title, this.path});
+  PhotoData(this.title, this.path);
 }

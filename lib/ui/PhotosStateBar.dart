@@ -4,7 +4,7 @@ import 'package:cctracker/ui/widget/ItemPhoto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:convert';
+
 
 
 
@@ -115,15 +115,7 @@ class PhotosStateBarState extends State<PhotosStateBar> {
 
   }
 
-  void decodeJson(String stringJson) async{
-    Map<String, dynamic> map =  jsonDecode(stringJson);
-    String imageString = map["image"];
-    String title = map["title"];
 
-
-    print("tak =====   --- imageString =   $imageString");
-    print("tak =====   ---  title =   $title");
-  }
 
 
 }

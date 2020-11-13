@@ -34,8 +34,10 @@ class ItemPhoto extends StatelessWidget {
               width: 152.0,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(
-                      image),
+                  image:
+                  AssetImage(
+                      image
+                  ),
                   fit: BoxFit.fitHeight,
                 ),
                 // shape: BoxShape.circle,

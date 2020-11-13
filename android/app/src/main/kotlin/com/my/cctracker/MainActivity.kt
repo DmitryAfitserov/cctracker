@@ -13,12 +13,12 @@ import io.flutter.plugins.GeneratedPluginRegistrant
 
 class MainActivity : FlutterActivity() {
 
-    private val CHANNEL = "com.my.flutter/epic"
+    private val CHANNEL_SETTINGS = "com.my.flutter/settings"
+    private val CHANNEL_PHOTO = "com.my.flutter/photo"
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { methodCall, result ->
-            Singleton.mch = result
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL_SETTINGS).setMethodCallHandler { methodCall, result ->
 
             when (methodCall.method) {
                 "aboutApp" -> {
@@ -47,16 +47,18 @@ class MainActivity : FlutterActivity() {
                     rateApp()
                     result.success("Kotlin OK rateApp")
                 }
-                "activity_photo" -> {
-                 //   result.success("Kotlin OK activity_photo")
-                    photoActivity()
-                }
+
                 else -> {
                     result.success("Kotlin OK, not action")
                 }
 
             }
 
+        }
+
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL_PHOTO).setMethodCallHandler { methodCall, result ->
+            Singleton.mch = result
+            photoActivity()
         }
 
 

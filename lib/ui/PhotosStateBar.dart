@@ -3,6 +3,7 @@ import 'package:cctracker/ui/widget/ItemPhoto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:convert';
 
 class PhotosStateBar extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class PhotosStateBar extends StatefulWidget {
 
 class PhotosStateBarState extends State<PhotosStateBar> {
 
-  static const platform = const MethodChannel("com.my.flutter/epic");
+  static const platformPhoto = const MethodChannel("com.my.flutter/photo");
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class PhotosStateBarState extends State<PhotosStateBar> {
                   itemCount: 10,
                   itemBuilder: (BuildContext ctxt, int index) {
                     return ItemPhoto(
-                      image: "assets/images/image_temp.jpg",
+                      image: "content:\/\/media\/external\/images\/media\/20305",
                         title: "title",
                       callback: () => onPressItem(index),
                     );
@@ -63,22 +64,31 @@ class PhotosStateBarState extends State<PhotosStateBar> {
   }
 
   void onPressAddPhoto() {
-    print("On pressed");
-    startActivityInKotlin();
-  //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => PhotoPlatformView()));
-  //  PhotoPlatformView();
+    startActivityPhotoInKotlin();
   }
 
-  void startActivityInKotlin() async{
 
+  void startActivityPhotoInKotlin() async{
     String value;
-
     try {
-      value = await platform.invokeMethod("activity_photo");
+      value = await platformPhoto.invokeMethod("activity_photo");
     } catch (e) {
       print(e);
     }
+    decodeJson(value);
+    //   Uri uri = Uri.parse("content:\/\/media\/external\/images\/media\/20305");
 // {"title":"Рлл","image":"content:\/\/media\/external\/images\/media\/20305"}
+
     print(value);
+
   }
+
+  void decodeJson(String stringJson) async{
+    Map<String, dynamic> map =  jsonDecode(stringJson);
+    String imageString = map["image"];
+    String title = map["title"];
+    print("tak =====   --- imageString =   $imageString");
+    print("tak =====   ---  title =   $title");
+  }
+
 }

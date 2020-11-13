@@ -12,7 +12,7 @@ class SettingsStateBar extends StatefulWidget {
 
 class SettingsStateBarState extends State<SettingsStateBar> {
 
-  static const platform = const MethodChannel("com.my.flutter/epic");
+  static const platformSettings = const MethodChannel("com.my.flutter/settings");
 
   List<String> _listViewData = [
     "О приложении",
@@ -141,7 +141,7 @@ class SettingsStateBarState extends State<SettingsStateBar> {
     String value;
 
     try {
-      value = await platform.invokeMethod(nameMethod);
+      value = await platformSettings.invokeMethod(nameMethod);
     } catch (e) {
       print(e);
     }

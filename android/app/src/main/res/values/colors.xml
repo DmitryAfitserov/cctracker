@@ -3,6 +3,7 @@
     <item type="id" name="id" />
 
     <color name="orange">#ff5500</color>
+    <color name="red">	#FF0000</color>
     <color name="white">#ffffff</color>
     <color name="transparent">#00000000</color>
     <color name="date_color">#999999</color>

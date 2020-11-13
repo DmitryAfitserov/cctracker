@@ -13,10 +13,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toolbar
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -139,14 +136,14 @@ class PhotoActivity : AppCompatActivity() {
         if(!isPhotoInImageView){
             Log.d("EEE", "if(!isPhotoInImageView)")
             // toast
-
+            Toast.makeText(applicationContext, "You need to add a photo", Toast.LENGTH_SHORT).show()
+            imageView.setBackgroundResource(R.drawable.border_for_image_error)
         }
         if(textInputLayout.editText?.text!!.isEmpty()){
-            textInputEditText.error = "You need to enter a title"
+            textInputEditText.error = "You need to input a title"
         }
 
         if(isPhotoInImageView && textInputLayout.editText?.text!!.isNotEmpty()){
-            Log.d("EEE", "all is OK ---- OK")
             return true
         }
         return false

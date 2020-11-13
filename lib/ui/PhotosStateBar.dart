@@ -1,11 +1,11 @@
-
+import 'package:cctracker/bloc/Bloc.dart';
+import 'package:cctracker/models/PhotoData.dart';
 import 'package:cctracker/ui/widget/ItemPhoto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
 
-import 'package:flutter_absolute_path/flutter_absolute_path.dart';
 
 
 class PhotosStateBar extends StatefulWidget {
@@ -21,6 +21,7 @@ class PhotosStateBarState extends State<PhotosStateBar> {
 
   @override
   Widget build(BuildContext context) {
+    bloc.fetchPhoto();
    // List<String> litems = ["1", "2", "3", "4"];
     return Scaffold(
         appBar: AppBar(
@@ -31,16 +32,28 @@ class PhotosStateBarState extends State<PhotosStateBar> {
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-                child: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (BuildContext ctxt, int index) {
-                    return ItemPhoto(
-                      image: "content:\/\/media\/external\/images\/media\/20305",
-                        title: "title",
-                      callback: () => onPressItem(index),
-                    );
+                child:
+                StreamBuilder(
+                  stream: bloc.dataPhotos,
+                  builder: (context, AsyncSnapshot<List<PhotoData>> snapshot) {
+
+                    print(Text("snapshot.hasData ------ not snapshot.hasData -----   "));
+
+                    if (snapshot.hasData) {
+
+                        print(Text("snapshot.hasData ------ ok"));
+
+                      return  createList(snapshot);
+
+                    } else if (snapshot.hasError) {
+                         print(Text("snapshot.hasData ------ error -----   " + snapshot.error.toString()));
+                      return Text(snapshot.error.toString());
+                    }
+                    return Center(child: CircularProgressIndicator());
                   },
-            )),
+                )
+
+            ),
             ButtonTheme(
               minWidth: 200,
               height: 42.0,
@@ -62,6 +75,20 @@ class PhotosStateBarState extends State<PhotosStateBar> {
         ));
   }
 
+  Widget createList(AsyncSnapshot<List<PhotoData>> snapshot){
+
+    return ListView.builder(
+      itemCount: snapshot.data.length,
+      itemBuilder: (BuildContext ctxt, int index) {
+        return ItemPhoto(
+          image: snapshot.data[index].path,
+          title: snapshot.data[index].title,
+          callback: () => onPressItem(index),
+        );
+      },
+    );
+  }
+
   void onPressItem(int position) {
     print("On pressed item position $position");
   }
@@ -78,7 +105,9 @@ class PhotosStateBarState extends State<PhotosStateBar> {
     } catch (e) {
       print(e);
     }
-    decodeJson(value);
+    bloc.addPhoto(value);
+   // decodeJson(value);
+
     //   Uri uri = Uri.parse("content:\/\/media\/external\/images\/media\/20305");
 // {"title":"Рлл","image":"content:\/\/media\/external\/images\/media\/20305"}
 
@@ -91,15 +120,10 @@ class PhotosStateBarState extends State<PhotosStateBar> {
     String imageString = map["image"];
     String title = map["title"];
 
-    convertFilePath("g");
 
     print("tak =====   --- imageString =   $imageString");
     print("tak =====   ---  title =   $title");
   }
 
-  void convertFilePath(String path) async{
-    var path = await FlutterAbsolutePath.getAbsolutePath("content://media/external/images/media/27485");
-    print("tak =====   ---  title =   $path");
-  }
 
 }

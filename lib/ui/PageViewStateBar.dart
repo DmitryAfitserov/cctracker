@@ -65,7 +65,7 @@ class PageVIewStateBarState extends State<PageVIewStateBar> with SingleTickerPro
 
   @override
   Widget build(BuildContext context) {
-    bloc.fetch();
+    bloc.fetchListData();
     return Scaffold(
         appBar: AppBar(
           title: Text("CC Tracker"),
@@ -89,7 +89,7 @@ class PageVIewStateBarState extends State<PageVIewStateBar> with SingleTickerPro
 
         floatingActionButton: FloatingActionButton(
             child: Icon(Icons.refresh),
-            onPressed: () => bloc.fetch()
+            onPressed: () => bloc.fetchListData()
         )
 
 
@@ -98,7 +98,7 @@ class PageVIewStateBarState extends State<PageVIewStateBar> with SingleTickerPro
 
   Widget createStreamBuilder(){
     return StreamBuilder(
-      stream: bloc.allMovies,
+      stream: bloc.dataCC,
       builder: (context, AsyncSnapshot<List<CCData>> snapshot) {
         if (snapshot.hasData) {
 

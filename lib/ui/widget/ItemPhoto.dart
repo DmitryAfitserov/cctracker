@@ -2,6 +2,8 @@
 
 import 'dart:io';
 
+import 'package:cctracker/bloc/Bloc.dart';
+import 'package:cctracker/models/PhotoData.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -24,14 +26,16 @@ class ItemPhoto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  //  final filePath = await FlutterAbsolutePath.getAbsolutePath("content://media/external/images/media/27485");
-    return RaisedButton(
+    bloc.fetchPhoto();
+
+    return  RaisedButton(
       onPressed: callback,
       padding: EdgeInsets.symmetric(vertical: 0, horizontal: 2),
       child: Card(
         elevation: 4,
-        child: Row(
+        child:
 
+        Row(
           children: [
             Container(
               margin: EdgeInsets.all(8),
@@ -39,11 +43,7 @@ class ItemPhoto extends StatelessWidget {
               width: 152.0,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: FileImage(File("/data/user/0/com.my.cctracker/cache/IMG_1605283053887.png"))
-
-                  //  AssetImage(
-                  //      "content://media/external/images/media/27485"
-                  //  )
+                  image: FileImage(File(image))
                   ,
                   fit: BoxFit.fitHeight,
                 ),
@@ -51,21 +51,12 @@ class ItemPhoto extends StatelessWidget {
               ),
             ),
             Text(title, style: TextStyle(fontSize: 16),),
-
           ],
-
         ),
-
       ),
 
     );
-
   }
 
-  Future<String> getPath() async{
-   // final filePath = await FlutterAbsolutePath.getAbsolutePath("content://media/external/images/media/27485");
-    Image.file(File("content://media/external/images/media/27485"));
-    return " ";
-  }
 
 }

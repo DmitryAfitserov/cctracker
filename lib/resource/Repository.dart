@@ -1,8 +1,16 @@
 import 'package:cctracker/models/CCData.dart';
+import 'package:cctracker/models/PhotoData.dart';
 import 'package:cctracker/resource/APIProvider.dart';
+
+import 'PreferencesUtil.dart';
 
 class Repository {
   final apiProvider = APIProvider();
+  final preferencesUtil = PreferencesUtil();
 
-  Future<List<CCData>> fetch() => apiProvider.loadCC();
+  Future<List<CCData>> fetchListData() => apiProvider.loadCC();
+
+  Future<List<PhotoData>> fetchPhoto() => preferencesUtil.loadListPhoto();
+
+  addPhoto() => preferencesUtil.addPhoto();
 }

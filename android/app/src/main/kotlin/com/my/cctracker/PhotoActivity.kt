@@ -23,10 +23,8 @@ import com.my.cctracker.singleton.Singleton
 class PhotoActivity : AppCompatActivity() {
 
     private lateinit var mCurrentPhotoPath: Uri
-    private val PERMISSION_CODE_READ_GALLERY = 1001
-    private val PERMISSION_CODE_WRITE_GALLERY = 1002
-    private val PERMISSION_CODE_WRITE_CAMERA = 1011
-    private val PERMISSION_CODE_READ_CAMERA = 1012
+    private val PERMISSION_CODE_GALLERY = 1001
+    private val PERMISSION_CODE_CAMERA = 1012
     private val IMAGE_PICK_CODE = 1000
     private val TAKE_PHOTO_REQUEST = 1003
 
@@ -95,7 +93,7 @@ class PhotoActivity : AppCompatActivity() {
 
 
     private fun getPhotoFromGallery(){
-        if(checkPermissionForImage(PERMISSION_CODE_READ_GALLERY, PERMISSION_CODE_WRITE_GALLERY)){
+        if(checkPermissionForImage(PERMISSION_CODE_GALLERY)){
 
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
@@ -106,7 +104,7 @@ class PhotoActivity : AppCompatActivity() {
 
     private fun launchCamera() {
 
-        if(checkPermissionForImage(PERMISSION_CODE_READ_CAMERA, PERMISSION_CODE_WRITE_CAMERA)){
+        if(checkPermissionForImage(PERMISSION_CODE_CAMERA)){
             val values = ContentValues(1)
             values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")
             val fileUri = contentResolver
@@ -125,18 +123,18 @@ class PhotoActivity : AppCompatActivity() {
     }
 
 
-    private fun checkPermissionForImage(p_c_r: Int, p_c_w : Int) :Boolean {
+    private fun checkPermissionForImage(p_c_r: Int) :Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if ((checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
                     && (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
             ) {
-                val permission = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+                val permission = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 val permissionCoarse = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
 
                 requestPermissions(permission, p_c_r)
 
-                requestPermissions(permissionCoarse, p_c_w)
+
                 return false
             } else {
                 return true
@@ -161,13 +159,13 @@ class PhotoActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
       //  super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         Log.d("EEE", "onRequestPermissionsResult ---- body")
-        if (requestCode == PERMISSION_CODE_READ_GALLERY) {
+        if (requestCode == PERMISSION_CODE_GALLERY) {
             Log.d("EEE", "PERMISSION_CODE_READ_GALLERY ---- body")
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Log.d("EEE", "PERMISSION_CODE_READ_GALLERY PERMISSION_GRANTED ---- body")
                 getPhotoFromGallery()
             }
-        } else if (requestCode == PERMISSION_CODE_READ_CAMERA) {
+        } else if (requestCode == PERMISSION_CODE_CAMERA) {
             Log.d("EEE", "PERMISSION_CODE_WRITE_CAMERA ---- body")
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Log.d("EEE", "PERMISSION_CODE_WRITE_CAMERA PERMISSION_GRANTED ---- body")

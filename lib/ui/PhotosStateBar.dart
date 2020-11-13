@@ -1,9 +1,12 @@
-import 'package:cctracker/ui/PhotoPlatformView.dart';
+
 import 'package:cctracker/ui/widget/ItemPhoto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
+
+import 'package:flutter_absolute_path/flutter_absolute_path.dart';
+
 
 class PhotosStateBar extends StatefulWidget {
   @override
@@ -87,8 +90,16 @@ class PhotosStateBarState extends State<PhotosStateBar> {
     Map<String, dynamic> map =  jsonDecode(stringJson);
     String imageString = map["image"];
     String title = map["title"];
+
+    convertFilePath("g");
+
     print("tak =====   --- imageString =   $imageString");
     print("tak =====   ---  title =   $title");
+  }
+
+  void convertFilePath(String path) async{
+    var path = await FlutterAbsolutePath.getAbsolutePath("content://media/external/images/media/27485");
+    print("tak =====   ---  title =   $path");
   }
 
 }

@@ -1,3 +1,7 @@
+
+
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +24,7 @@ class ItemPhoto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  //  final filePath = await FlutterAbsolutePath.getAbsolutePath("content://media/external/images/media/27485");
     return RaisedButton(
       onPressed: callback,
       padding: EdgeInsets.symmetric(vertical: 0, horizontal: 2),
@@ -34,10 +39,12 @@ class ItemPhoto extends StatelessWidget {
               width: 152.0,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image:
-                  AssetImage(
-                      image
-                  ),
+                  image: FileImage(File("/data/user/0/com.my.cctracker/cache/IMG_1605283053887.png"))
+
+                  //  AssetImage(
+                  //      "content://media/external/images/media/27485"
+                  //  )
+                  ,
                   fit: BoxFit.fitHeight,
                 ),
                 // shape: BoxShape.circle,
@@ -54,4 +61,11 @@ class ItemPhoto extends StatelessWidget {
     );
 
   }
+
+  Future<String> getPath() async{
+   // final filePath = await FlutterAbsolutePath.getAbsolutePath("content://media/external/images/media/27485");
+    Image.file(File("content://media/external/images/media/27485"));
+    return " ";
+  }
+
 }

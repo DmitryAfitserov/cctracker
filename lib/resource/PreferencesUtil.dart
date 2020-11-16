@@ -5,19 +5,12 @@ import 'package:cctracker/models/PhotoData.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PreferencesUtil{
-
+class PreferencesUtil {
   List<PhotoData> dataPhotos = [];
 
-  void addDataInListPhoto(){
-
-  }
+  void addDataInListPhoto() {}
 
   Future<List<PhotoData>> loadListPhoto() async {
-
-
-
-
     return dataPhotos;
   }
 
@@ -32,23 +25,18 @@ class PreferencesUtil{
     dataPhotos.add(data);
 
     return dataPhotos;
-
   }
 
-
-
-  void saveData() async{
+  void saveData() async {
     print("==== =---- - - destroy   saveData ");
-   // final SharedPreferences prefs = await SharedPreferences.getInstance();
-
+    // final SharedPreferences prefs = await SharedPreferences.getInstance();
   }
 
   void decodeJson(String stringJson, PhotoData data) {
-    Map<String, dynamic> map =  jsonDecode(stringJson);
+    Map<String, dynamic> map = jsonDecode(stringJson);
     data.path = map["image"];
     data.title = map["title"];
   }
-
 
   Future<String> convertFilePath(String path) async {
     var pathToFile = await FlutterAbsolutePath.getAbsolutePath(path);
@@ -56,11 +44,10 @@ class PreferencesUtil{
     return pathToFile.toString();
   }
 
-
-  // Future<String> getPath() async{
-  //   // final filePath = await FlutterAbsolutePath.getAbsolutePath("content://media/external/images/media/27485");
-  //   Image.file(File("content://media/external/images/media/27485"));
-  //   return " ";
-  // }
+// Future<String> getPath() async{
+//   // final filePath = await FlutterAbsolutePath.getAbsolutePath("content://media/external/images/media/27485");
+//   Image.file(File("content://media/external/images/media/27485"));
+//   return " ";
+// }
 
 }

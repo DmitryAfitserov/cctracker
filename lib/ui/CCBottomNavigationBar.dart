@@ -10,11 +10,10 @@ class CCBottomNavigationBar extends StatefulWidget {
   State createState() {
     return CCBottomNavigationBarState();
   }
-
-
 }
 
-class CCBottomNavigationBarState extends State<CCBottomNavigationBar> with WidgetsBindingObserver {
+class CCBottomNavigationBarState extends State<CCBottomNavigationBar>
+    with WidgetsBindingObserver {
   int currentIndexBottomBar = 0;
   final List<Widget> childrenStates = [
     PageVIewStateBar(),
@@ -22,20 +21,21 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar> with Widge
     SettingsStateBar(),
   ];
 
-
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
   }
 
-
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if(state.index == 3){
+    if (state.index == 3) {
       bloc.dispose();
     }
-    print("--------------------- state    " + state.toString() + " index = " + state.index.toString());
+    print("--------------------- state    " +
+        state.toString() +
+        " index = " +
+        state.index.toString());
   }
 
   @override
@@ -74,10 +74,8 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar> with Widge
 
   @override
   void dispose() {
-    print("==== =------------------------------ - - destroy  CCBottomNavigationBar");
+    print(
+        "==== =------------------------------ - - destroy  CCBottomNavigationBar");
     super.dispose();
-
   }
-
-
 }

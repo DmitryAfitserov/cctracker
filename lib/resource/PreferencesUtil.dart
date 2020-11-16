@@ -6,7 +6,7 @@ import 'dart:convert';
 
 class PreferencesUtil{
 
-  List<PhotoData> data = [];
+  List<PhotoData> dataPhotos = [];
 
   void addDataInListPhoto(){
 
@@ -17,16 +17,19 @@ class PreferencesUtil{
 
 
 
-    return data;
+    return dataPhotos;
   }
 
-  Future addPhoto(String jsonString) async {
+  Future<List<PhotoData>> addPhoto(String jsonString) async {
     PhotoData data = PhotoData("", "");
-    decodeJson(jsonString, data);
-    print("decodeJson =====   --- imageString =   " + data.path);
-    print("decodeJson =====   ---  title =   " + data.title);
-    convertFilePath(data);
 
+    decodeJson(jsonString, data);
+    // print("decodeJson =====   --- imageString =   " + data.path);
+    // print("decodeJson =====   ---  title =   " + data.title);
+    data.path = await convertFilePath(data.path);
+    print("tak =====   ---  data.path =  " + data.path);
+    dataPhotos.add(data);
+    return dataPhotos;
 
   }
 
@@ -37,13 +40,10 @@ class PreferencesUtil{
   }
 
 
-
-
-
-  void convertFilePath(PhotoData data) {
-    var path = FlutterAbsolutePath.getAbsolutePath(data.path);
-    data.path = path.toString();
+  Future<String> convertFilePath(String path) async {
+    var pathToFile = await FlutterAbsolutePath.getAbsolutePath(path);
     print("tak =====   ---  title =   $path");
+    return pathToFile.toString();
   }
 
 

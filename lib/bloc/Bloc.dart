@@ -3,12 +3,15 @@
 import 'package:cctracker/models/PhotoData.dart';
 import 'package:cctracker/resource/Repository.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'package:cctracker/models/CCData.dart';
 
 class Bloc {
   final _repository = Repository();
+
+  List<PhotoData> listPhotoOld;
 
   final _fetcherListData = PublishSubject<List<CCData>>();
   final _fetcherPhoto = PublishSubject<List<PhotoData>>();
@@ -23,13 +26,25 @@ class Bloc {
 
   fetchPhoto() async {
     List<PhotoData> listPhoto = await _repository.fetchPhoto();
-    print(Text("List<PhotoData> listPhoto = await _repository.fetchPhoto(); ------ ok"));
-    _fetcherPhoto.sink.add(listPhoto);
+    if(listPhotoOld != null){
+      if(listPhotoOld.length != listPhoto.length){
+        print(Text("listPhotoOld.length != listPhoto.length"));
+        listPhotoOld = listPhoto;
+        _fetcherPhoto.sink.add(listPhoto);
+      } else {
+        print("-------------------- error");
+      }
+    }
+
+
   }
 
   addPhoto(String jsonString) async {
-    await _repository.addPhoto(jsonString);
-  //  _fetcherPhoto.sink.add(listPhoto);
+    List<PhotoData> listPhoto =  await _repository.addPhoto(jsonString);
+    print("I get my list =====   ---  data.path =  " + listPhoto.length.toString());
+    listPhotoOld = listPhoto;
+    _fetcherPhoto.sink.add(listPhoto);
+
   }
 
   dispose() {

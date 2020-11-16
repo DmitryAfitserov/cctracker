@@ -37,7 +37,7 @@ class PhotosStateBarState extends State<PhotosStateBar> {
                   stream: bloc.dataPhotos,
                   builder: (context, AsyncSnapshot<List<PhotoData>> snapshot) {
 
-                    print(Text("snapshot.hasData ------ not snapshot.hasData -----   "));
+                    print(Text("before snapshot.hasData ------ not snapshot.hasData -----   "));
 
                     if (snapshot.hasData) {
 

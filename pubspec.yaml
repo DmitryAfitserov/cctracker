@@ -32,6 +32,9 @@ dependencies:
   rxdart: 0.22.2
   image_picker: 0.6.7+12
   flutter_absolute_path: ^1.0.6
+  shared_preferences: 0.5.8
+
+
 
 dev_dependencies:
   flutter_test:

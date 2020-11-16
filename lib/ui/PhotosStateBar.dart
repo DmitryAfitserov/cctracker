@@ -115,7 +115,9 @@ class PhotosStateBarState extends State<PhotosStateBar> {
 
   }
 
-
-
-
+  @override
+  void dispose() {
+    super.dispose();
+    bloc.disposePhoto();
+  }
 }

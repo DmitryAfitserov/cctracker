@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:cctracker/models/PhotoData.dart';
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferencesUtil{
 
@@ -29,7 +30,16 @@ class PreferencesUtil{
     data.path = await convertFilePath(data.path);
     print("tak =====   ---  data.path =  " + data.path);
     dataPhotos.add(data);
+
     return dataPhotos;
+
+  }
+
+
+
+  void saveData() async{
+    print("==== =---- - - destroy   saveData ");
+   // final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   }
 

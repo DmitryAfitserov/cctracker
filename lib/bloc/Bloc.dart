@@ -34,6 +34,8 @@ class Bloc {
       } else {
         print("-------------------- error");
       }
+    } else {
+      _fetcherPhoto.sink.add(listPhoto);
     }
 
 
@@ -47,8 +49,21 @@ class Bloc {
 
   }
 
+  disposePhoto() {
+    print("==== =---- - - destroy  ");
+  //  _repository.saveData();
+  //  _fetcherPhoto.close();
+  }
+
   dispose() {
+    print("==== =---- - - dispose bloc  ");
+    _fetcherListData.close();
+    _repository.saveData();
     _fetcherPhoto.close();
+  }
+
+  disposeData() {
+    print("==== =---- - - destroy  ");
     _fetcherListData.close();
   }
 }

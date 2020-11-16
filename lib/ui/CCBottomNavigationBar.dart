@@ -1,3 +1,4 @@
+import 'package:cctracker/bloc/Bloc.dart';
 import 'package:cctracker/ui/PageViewStateBar.dart';
 import 'package:cctracker/ui/PhotosStateBar.dart';
 import 'package:cctracker/ui/SettingsStateBar.dart';
@@ -9,15 +10,33 @@ class CCBottomNavigationBar extends StatefulWidget {
   State createState() {
     return CCBottomNavigationBarState();
   }
+
+
 }
 
-class CCBottomNavigationBarState extends State<CCBottomNavigationBar> {
+class CCBottomNavigationBarState extends State<CCBottomNavigationBar> with WidgetsBindingObserver {
   int currentIndexBottomBar = 0;
   final List<Widget> childrenStates = [
     PageVIewStateBar(),
     PhotosStateBar(),
     SettingsStateBar(),
   ];
+
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if(state.index == 3){
+      bloc.dispose();
+    }
+    print("--------------------- state    " + state.toString() + " index = " + state.index.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,4 +71,13 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar> {
       currentIndexBottomBar = index;
     });
   }
+
+  @override
+  void dispose() {
+    print("==== =------------------------------ - - destroy  CCBottomNavigationBar");
+    super.dispose();
+
+  }
+
+
 }

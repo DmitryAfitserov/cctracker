@@ -45,7 +45,7 @@ class ItemPhoto extends StatelessWidget {
                 image: DecorationImage(
                   image: FileImage(File(image))
                   ,
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.fill,
                 ),
                 // shape: BoxShape.circle,
               ),

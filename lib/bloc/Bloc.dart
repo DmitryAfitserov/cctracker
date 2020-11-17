@@ -34,6 +34,7 @@ class Bloc {
         print("-------------------- error");
       }
     } else {
+      listPhotoOld = listPhoto;
       _fetcherPhoto.sink.add(listPhoto);
     }
   }
@@ -55,6 +56,10 @@ class Bloc {
     _fetcherListData.close();
 
     _fetcherPhoto.close();
+  }
+
+  disposePhotoStateBar(){
+    listPhotoOld = null;
   }
 
 

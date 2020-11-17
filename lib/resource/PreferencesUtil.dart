@@ -14,11 +14,24 @@ class PreferencesUtil {
   void addDataInListPhoto() {}
 
   Future<List<PhotoData>> loadListPhoto() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String jsonList = prefs.getString(KEY_PREF);
-    print("==== =---- - -   saveData from pref =   $jsonList ");
 
-    return dataPhotos;
+    if(dataPhotos.isEmpty){
+      print("==== =---- - -   dataPhotos.isEmpty");
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      String jsonList = prefs.getString(KEY_PREF);
+      print("==== =---- - -   saveData from pref =   $jsonList ");
+      dataPhotos = json.decode(jsonList)
+          .map<PhotoData>((data) => PhotoData.fromJson(data))
+          .toList();
+
+      return dataPhotos;
+    } else {
+      print("==== =---- - -   dataPhotos.isNotEmpty");
+      return dataPhotos;
+    }
+
+
+
   }
 
   Future<List<PhotoData>> addPhoto(String jsonString) async {

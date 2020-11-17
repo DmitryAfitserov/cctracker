@@ -14,4 +14,11 @@ class PhotoData {
 
     };
   }
+
+  factory PhotoData.fromJson(Map<String, dynamic> json) {
+    return PhotoData(
+      json['title'],
+      json['path'],
+    );
+  }
 }

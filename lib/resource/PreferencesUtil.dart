@@ -35,15 +35,13 @@ class PreferencesUtil {
     return dataPhotos;
   }
 
-   saveData() async {
+   Future<void> saveData() async {
 
     String encoded = jsonEncode(dataPhotos);
     print("==== =---- - -   saveData =   $encoded ");
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool test =  await prefs.setString(KEY_PREF, encoded);
-
-    print("==== =---- - -   saveData test =    " + test.toString()) ;
+    prefs.setString(KEY_PREF, encoded);
 
   }
 

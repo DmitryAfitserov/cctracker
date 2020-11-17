@@ -43,8 +43,9 @@ class Bloc {
     print("I get my list =====   ---  data.path =  " +
         listPhoto.length.toString());
     listPhotoOld = listPhoto;
-    _repository.saveData();
+
     _fetcherPhoto.sink.add(listPhoto);
+    await _repository.saveData();
   }
 
 

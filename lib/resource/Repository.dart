@@ -15,5 +15,5 @@ class Repository {
   Future<List<PhotoData>> addPhoto(String jsonString) =>
       preferencesUtil.addPhoto(jsonString);
 
-  saveData() => preferencesUtil.saveData();
+  Future<void> saveData() => preferencesUtil.saveData();
 }

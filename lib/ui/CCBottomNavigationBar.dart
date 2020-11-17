@@ -29,7 +29,7 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state.index == 2) {
+    if (state.index == 3) {
       bloc.dispose();
     }
     print("--------------------- state    " +

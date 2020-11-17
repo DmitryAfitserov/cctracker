@@ -1,3 +1,5 @@
+
+
 import 'package:flutter_absolute_path/flutter_absolute_path.dart';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
@@ -18,9 +20,13 @@ class PreferencesUtil {
     if(dataPhotos.isEmpty){
       print("==== =---- - -   dataPhotos.isEmpty");
       final SharedPreferences prefs = await SharedPreferences.getInstance();
+    //  prefs.remove(KEY_PREF);
       String jsonList = prefs.getString(KEY_PREF);
       print("==== =---- - -   saveData from pref =   $jsonList ");
-      dataPhotos = json.decode(jsonList)
+      if(jsonList == null){
+        return dataPhotos;
+      }
+      dataPhotos = (json.decode(jsonList) as List)
           .map<PhotoData>((data) => PhotoData.fromJson(data))
           .toList();
 
@@ -42,7 +48,7 @@ class PreferencesUtil {
     // print("decodeJson =====   ---  title =   " + data.title);
     data.path = await convertFilePath(data.path);
     print("tak =====   ---  data.path =  " + data.path);
-    dataPhotos.add(data);
+    dataPhotos.insert(0, data);
 
 
     return dataPhotos;

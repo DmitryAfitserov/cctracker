@@ -20,15 +20,22 @@ class PreferencesUtil {
     if(dataPhotos.isEmpty){
       print("==== =---- - -   dataPhotos.isEmpty");
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-    //  prefs.remove(KEY_PREF);
+     // prefs.remove(KEY_PREF);
       String jsonList = prefs.getString(KEY_PREF);
       print("==== =---- - -   saveData from pref =   $jsonList ");
       if(jsonList == null){
         return dataPhotos;
+      } else {
+        dataPhotos = List<PhotoData>.from(
+            json.decode(jsonList)
+                .map((data) => PhotoData.fromJson(data))
+        );
       }
-      dataPhotos = (json.decode(jsonList) as List)
-          .map<PhotoData>((data) => PhotoData.fromJson(data))
-          .toList();
+      // List tempDataPhotos = (json.decode(jsonList) as List)
+      //     .map<PhotoData>((data) => PhotoData.fromJson(data))
+      //     .toList();
+
+
 
       return dataPhotos;
     } else {

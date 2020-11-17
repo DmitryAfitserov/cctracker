@@ -22,7 +22,7 @@ class PhotosStateBarState extends State<PhotosStateBar> {
   @override
   Widget build(BuildContext context) {
     bloc.fetchPhoto();
-   // List<String> litems = ["1", "2", "3", "4"];
+
     return Scaffold(
         appBar: AppBar(
           title: Text("Photos"),
@@ -115,9 +115,5 @@ class PhotosStateBarState extends State<PhotosStateBar> {
 
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    bloc.disposePhoto();
-  }
+
 }

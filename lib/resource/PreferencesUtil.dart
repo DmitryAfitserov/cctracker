@@ -8,9 +8,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 class PreferencesUtil {
   List<PhotoData> dataPhotos = [];
 
+  final String KEY_PREF = "MY_KEY";
+
+
   void addDataInListPhoto() {}
 
   Future<List<PhotoData>> loadListPhoto() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String jsonList = prefs.getString(KEY_PREF);
+    print("==== =---- - -   saveData from pref =   $jsonList ");
+
     return dataPhotos;
   }
 
@@ -24,12 +31,20 @@ class PreferencesUtil {
     print("tak =====   ---  data.path =  " + data.path);
     dataPhotos.add(data);
 
+
     return dataPhotos;
   }
 
-  void saveData() async {
-    print("==== =---- - - destroy   saveData ");
-    // final SharedPreferences prefs = await SharedPreferences.getInstance();
+   saveData() async {
+
+    String encoded = jsonEncode(dataPhotos);
+    print("==== =---- - -   saveData =   $encoded ");
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool test =  await prefs.setString(KEY_PREF, encoded);
+
+    print("==== =---- - -   saveData test =    " + test.toString()) ;
+
   }
 
   void decodeJson(String stringJson, PhotoData data) {

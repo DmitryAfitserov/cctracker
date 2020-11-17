@@ -43,26 +43,20 @@ class Bloc {
     print("I get my list =====   ---  data.path =  " +
         listPhoto.length.toString());
     listPhotoOld = listPhoto;
+    _repository.saveData();
     _fetcherPhoto.sink.add(listPhoto);
   }
 
-  disposePhoto() {
-    print("==== =---- - - destroy  ");
-    //  _repository.saveData();
-    //  _fetcherPhoto.close();
-  }
 
   dispose() {
     print("==== =---- - - dispose bloc  ");
+  //  _repository.saveData();
     _fetcherListData.close();
-    _repository.saveData();
+
     _fetcherPhoto.close();
   }
 
-  disposeData() {
-    print("==== =---- - - destroy  ");
-    _fetcherListData.close();
-  }
+
 }
 
 final bloc = Bloc();

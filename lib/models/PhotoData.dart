@@ -6,4 +6,12 @@ class PhotoData {
 
 
   PhotoData(this.title, this.path);
+
+  Map<String, dynamic> toJson(){
+    return {
+      "title": this.title,
+      "path": this.path,
+
+    };
+  }
 }

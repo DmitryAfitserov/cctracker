@@ -20,7 +20,11 @@ class CCBottomNavigationBar extends StatefulWidget {
 class CCBottomNavigationBarState extends State<CCBottomNavigationBar>
     with WidgetsBindingObserver {
   int currentIndexBottomBar = 0;
-  GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+  String appBarTitle = "Crypto Tracker";
+  final String trackerTitle = "Crypto Tracker";
+  final String photoTitle = "Photos";
+  final String settingsTitle = "Settings";
+  GlobalKey<ScaffoldState> drawerKey = GlobalKey();
 
   final List<Widget> childrenStates = [
     PageVIewStateBar(),
@@ -39,19 +43,15 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar>
     if (state.index == 3) {
       bloc.dispose();
     }
-    print("--------------------- state    " +
-        state.toString() +
-        " index = " +
-        state.index.toString());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Drawer app"),
+        title: Text(appBarTitle),
       ),
-      key: _drawerKey,
+      key: drawerKey,
       drawer: NavDrawer(
           selectedPage: currentIndexBottomBar,
           callbackHome: () => onTabTappedDrawer(0),
@@ -85,25 +85,40 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar>
   }
 
   void onTabTapped(int index) {
+    String tmpTitle ="";
+
+    switch(index) {
+      case 0:
+        tmpTitle = trackerTitle;
+        break;
+      case 1:
+        tmpTitle = photoTitle;
+        break;
+      case 2:
+        tmpTitle = settingsTitle;
+        break;
+
+    }
     setState(() {
+      appBarTitle = tmpTitle;
       currentIndexBottomBar = index;
     });
   }
 
   void onTabTappedDrawer(int index) {
-
     Navigator.of(context).pop();
-    if(index != currentIndexBottomBar){
-      setState(() {
-        currentIndexBottomBar = index;
-      });
+    if (index != currentIndexBottomBar) {
+      onTabTapped(index);
     }
+  }
+
+
 
 
 
     // Navigator.of(context).push(MaterialPageRoute(
     //     builder: (BuildContext context) => PhotoPlatformView()));
-  }
+
 
   @override
   void dispose() {

@@ -24,9 +24,7 @@ class PhotosStateBarState extends State<PhotosStateBar> {
     bloc.fetchPhoto();
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Photos"),
-        ),
+
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           //crossAxisAlignment: CrossAxisAlignment.start,

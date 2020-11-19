@@ -39,7 +39,7 @@ class NavDrawer extends Drawer {
       child: ListView(
         children: <Widget>[
           ListTile(
-            title: Text("Ttem 1"),
+            title: Text("Item 1"),
             trailing: Icon(Icons.arrow_forward),
             onTap: callbackHome,
           ),

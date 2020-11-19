@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class CCBottomNavigationBar extends StatefulWidget {
+
+
+
   @override
   State createState() {
     return CCBottomNavigationBarState();
@@ -15,6 +18,8 @@ class CCBottomNavigationBar extends StatefulWidget {
 class CCBottomNavigationBarState extends State<CCBottomNavigationBar>
     with WidgetsBindingObserver {
   int currentIndexBottomBar = 0;
+  GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+
   final List<Widget> childrenStates = [
     PageVIewStateBar(),
     PhotosStateBar(),
@@ -41,8 +46,28 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Drawer app"),
+      ),
+      key: _drawerKey,
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            ListTile(
+              title: Text("Ttem 1"),
+              trailing: Icon(Icons.arrow_forward),
+            ),
+            ListTile(
+              title: Text("Item 2"),
+              trailing: Icon(Icons.arrow_forward),
+            ),
+          ],
+        ),
+      ),
       body: childrenStates[currentIndexBottomBar],
       bottomNavigationBar: BottomNavigationBar(
+
+
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

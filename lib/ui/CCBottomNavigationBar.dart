@@ -1,5 +1,6 @@
 import 'package:cctracker/bloc/Bloc.dart';
 import 'package:cctracker/ui/PageViewStateBar.dart';
+import 'package:cctracker/ui/PhotoPlatformView.dart';
 import 'package:cctracker/ui/PhotosStateBar.dart';
 import 'package:cctracker/ui/SettingsStateBar.dart';
 import 'package:cctracker/ui/widget/NavDrawer.dart';
@@ -51,7 +52,11 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar>
         title: Text("Drawer app"),
       ),
       key: _drawerKey,
-      drawer: NavDrawer(callbackHome: null, callbackPhoto: null, callbackSettings: null),
+      drawer: NavDrawer(
+          selectedPage: currentIndexBottomBar,
+          callbackHome: () => onTabTappedDrawer(0),
+          callbackPhoto: () => onTabTappedDrawer(1),
+          callbackSettings: () => onTabTappedDrawer(2)),
       body: childrenStates[currentIndexBottomBar],
       bottomNavigationBar: BottomNavigationBar(
 
@@ -85,10 +90,24 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar>
     });
   }
 
+  void onTabTappedDrawer(int index) {
+
+    Navigator.of(context).pop();
+    if(index != currentIndexBottomBar){
+      setState(() {
+        currentIndexBottomBar = index;
+      });
+    }
+
+
+
+    // Navigator.of(context).push(MaterialPageRoute(
+    //     builder: (BuildContext context) => PhotoPlatformView()));
+  }
+
   @override
   void dispose() {
-    print(
-        "==== =------------------------------ - - destroy  CCBottomNavigationBar");
+    bloc.dispose();
     super.dispose();
   }
 }

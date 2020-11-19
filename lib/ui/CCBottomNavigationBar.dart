@@ -2,6 +2,7 @@ import 'package:cctracker/bloc/Bloc.dart';
 import 'package:cctracker/ui/PageViewStateBar.dart';
 import 'package:cctracker/ui/PhotosStateBar.dart';
 import 'package:cctracker/ui/SettingsStateBar.dart';
+import 'package:cctracker/ui/widget/NavDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -50,20 +51,7 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar>
         title: Text("Drawer app"),
       ),
       key: _drawerKey,
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            ListTile(
-              title: Text("Ttem 1"),
-              trailing: Icon(Icons.arrow_forward),
-            ),
-            ListTile(
-              title: Text("Item 2"),
-              trailing: Icon(Icons.arrow_forward),
-            ),
-          ],
-        ),
-      ),
+      drawer: NavDrawer(callbackHome: null, callbackPhoto: null, callbackSettings: null),
       body: childrenStates[currentIndexBottomBar],
       bottomNavigationBar: BottomNavigationBar(
 

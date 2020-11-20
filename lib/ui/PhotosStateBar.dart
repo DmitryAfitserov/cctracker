@@ -5,9 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
-
-
 class PhotosStateBar extends StatefulWidget {
   @override
   State createState() {
@@ -16,7 +13,6 @@ class PhotosStateBar extends StatefulWidget {
 }
 
 class PhotosStateBarState extends State<PhotosStateBar> {
-
   static const platformPhoto = const MethodChannel("com.my.flutter/photo");
 
   @override
@@ -24,57 +20,51 @@ class PhotosStateBarState extends State<PhotosStateBar> {
     bloc.fetchPhoto();
 
     return Scaffold(
-
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-                child:
-                StreamBuilder(
-                  stream: bloc.dataPhotos,
-                  builder: (context, AsyncSnapshot<List<PhotoData>> snapshot) {
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+            child: StreamBuilder(
+          stream: bloc.dataPhotos,
+          builder: (context, AsyncSnapshot<List<PhotoData>> snapshot) {
+            print(Text(
+                "before snapshot.hasData ------ not snapshot.hasData -----   "));
 
-                    print(Text("before snapshot.hasData ------ not snapshot.hasData -----   "));
+            if (snapshot.hasData) {
+              print(Text("snapshot.hasData ------ ok"));
 
-                    if (snapshot.hasData) {
-
-                        print(Text("snapshot.hasData ------ ok"));
-
-                      return  createList(snapshot);
-
-                    } else if (snapshot.hasError) {
-                         print(Text("snapshot.hasData ------ error -----   " + snapshot.error.toString()));
-                      return Text(snapshot.error.toString());
-                    }
-                    return Center(child: CircularProgressIndicator());
-                  },
-                )
-
+              return createList(snapshot);
+            } else if (snapshot.hasError) {
+              print(Text("snapshot.hasData ------ error -----   " +
+                  snapshot.error.toString()));
+              return Text(snapshot.error.toString());
+            }
+            return Center(child: CircularProgressIndicator());
+          },
+        )),
+        ButtonTheme(
+          minWidth: 200,
+          height: 42.0,
+          child: RaisedButton(
+            child: Text(
+              "Add photo",
+              style: TextStyle(fontSize: 18),
             ),
-            ButtonTheme(
-              minWidth: 200,
-              height: 42.0,
-              child: RaisedButton(
-                child: Text(
-                  "Add photo",
-                  style: TextStyle(fontSize: 18),
-                ),
-                onPressed: () => onPressAddPhoto(),
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                elevation: 5,
-                color: Colors.blue,
-                textColor: Colors.white,
-              ),
-            )
-          ],
-        ));
+            onPressed: () => onPressAddPhoto(),
+            padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(8.0))),
+            elevation: 5,
+            color: Colors.blue,
+            textColor: Colors.white,
+          ),
+        )
+      ],
+    ));
   }
 
-  Widget createList(AsyncSnapshot<List<PhotoData>> snapshot){
-
+  Widget createList(AsyncSnapshot<List<PhotoData>> snapshot) {
     return ListView.builder(
       itemCount: snapshot.data.length,
       itemBuilder: (BuildContext ctxt, int index) {
@@ -95,8 +85,7 @@ class PhotosStateBarState extends State<PhotosStateBar> {
     startActivityPhotoInKotlin();
   }
 
-
-  void startActivityPhotoInKotlin() async{
+  void startActivityPhotoInKotlin() async {
     String value;
     try {
       value = await platformPhoto.invokeMethod("activity_photo");
@@ -104,19 +93,17 @@ class PhotosStateBarState extends State<PhotosStateBar> {
       print(e);
     }
     bloc.addPhoto(value);
-   // decodeJson(value);
+    // decodeJson(value);
 
     //   Uri uri = Uri.parse("content:\/\/media\/external\/images\/media\/20305");
 // {"title":"Рлл","image":"content:\/\/media\/external\/images\/media\/20305"}
 
     print(value);
-
   }
 
   @override
   void dispose() {
     bloc.disposePhotoStateBar();
     super.dispose();
-
   }
 }

@@ -11,8 +11,8 @@ class SettingsStateBar extends StatefulWidget {
 }
 
 class SettingsStateBarState extends State<SettingsStateBar> {
-
-  static const platformSettings = const MethodChannel("com.my.flutter/settings");
+  static const platformSettings =
+      const MethodChannel("com.my.flutter/settings");
 
   List<String> _listViewData = [
     "О приложении",
@@ -27,7 +27,6 @@ class SettingsStateBarState extends State<SettingsStateBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -58,37 +57,37 @@ class SettingsStateBarState extends State<SettingsStateBar> {
                         //   borderRadius: BorderRadius.circular(12.0),
                         // ),
                         child: Column(
-                          children: [
-                            ItemSetting(
-                              onPressed: () => onTapList(0),
-                              title: _listViewData[0],
-                            ),
-                            ItemSetting(
-                              onPressed: () => onTapList(1),
-                              title: _listViewData[1],
-                            ),
-                            ItemSetting(
-                              onPressed: () => onTapList(2),
-                              title: _listViewData[2],
-                            ),
-                            ItemSetting(
-                              onPressed: () => onTapList(3),
-                              title: _listViewData[3],
-                            ),
-                            ItemSetting(
-                              onPressed: () => onTapList(4),
-                              title: _listViewData[4],
-                            ),
-                            ItemSetting(
-                              onPressed: () => onTapList(5),
-                              title: _listViewData[5],
-                            ),
-                            ItemSetting(
-                              onPressed: () => onTapList(6),
-                              title: _listViewData[6],
-                            ),
-                          ],
-                        )),
+                      children: [
+                        ItemSetting(
+                          onPressed: () => onTapList(0),
+                          title: _listViewData[0],
+                        ),
+                        ItemSetting(
+                          onPressed: () => onTapList(1),
+                          title: _listViewData[1],
+                        ),
+                        ItemSetting(
+                          onPressed: () => onTapList(2),
+                          title: _listViewData[2],
+                        ),
+                        ItemSetting(
+                          onPressed: () => onTapList(3),
+                          title: _listViewData[3],
+                        ),
+                        ItemSetting(
+                          onPressed: () => onTapList(4),
+                          title: _listViewData[4],
+                        ),
+                        ItemSetting(
+                          onPressed: () => onTapList(5),
+                          title: _listViewData[5],
+                        ),
+                        ItemSetting(
+                          onPressed: () => onTapList(6),
+                          title: _listViewData[6],
+                        ),
+                      ],
+                    )),
                     //      )
                   ],
                 ),
@@ -98,44 +97,47 @@ class SettingsStateBarState extends State<SettingsStateBar> {
 
   void onTapList(int position) {
     print(Text("position =  $position "));
-    switch (position){
-      case 0: {
-        print("case 0");
-        doInKotlin("aboutApp");
-        break;
-      }
-      case 1: {
-        doInKotlin("help");
-        break;
-      }
-      case 2: {
-        doInKotlin("feedback");
-        break;
-      }
-      case 3: {
-        doInKotlin("shareApp");
-        break;
-      }
-      case 4: {
-        doInKotlin("termsOfUse");
-        break;
-      }
-      case 5: {
-        doInKotlin("privacyPolicy");
-        break;
-      }
-      case 6: {
-        doInKotlin("rateApp");
-        break;
-      }
-
+    switch (position) {
+      case 0:
+        {
+          print("case 0");
+          doInKotlin("aboutApp");
+          break;
+        }
+      case 1:
+        {
+          doInKotlin("help");
+          break;
+        }
+      case 2:
+        {
+          doInKotlin("feedback");
+          break;
+        }
+      case 3:
+        {
+          doInKotlin("shareApp");
+          break;
+        }
+      case 4:
+        {
+          doInKotlin("termsOfUse");
+          break;
+        }
+      case 5:
+        {
+          doInKotlin("privacyPolicy");
+          break;
+        }
+      case 6:
+        {
+          doInKotlin("rateApp");
+          break;
+        }
     }
-
-
   }
 
-  void doInKotlin(String nameMethod) async{
-
+  void doInKotlin(String nameMethod) async {
     String value;
 
     try {
@@ -146,5 +148,4 @@ class SettingsStateBarState extends State<SettingsStateBar> {
 
     print(value);
   }
-
 }

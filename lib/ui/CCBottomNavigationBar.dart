@@ -8,9 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class CCBottomNavigationBar extends StatefulWidget {
-
-
-
   @override
   State createState() {
     return CCBottomNavigationBarState();
@@ -59,8 +56,6 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar>
           callbackSettings: () => onTabTappedDrawer(2)),
       body: childrenStates[currentIndexBottomBar],
       bottomNavigationBar: BottomNavigationBar(
-
-
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -85,9 +80,9 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar>
   }
 
   void onTabTapped(int index) {
-    String tmpTitle ="";
+    String tmpTitle = "";
 
-    switch(index) {
+    switch (index) {
       case 0:
         tmpTitle = trackerTitle;
         break;
@@ -97,7 +92,6 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar>
       case 2:
         tmpTitle = settingsTitle;
         break;
-
     }
     setState(() {
       appBarTitle = tmpTitle;
@@ -112,13 +106,8 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar>
     }
   }
 
-
-
-
-
-    // Navigator.of(context).push(MaterialPageRoute(
-    //     builder: (BuildContext context) => PhotoPlatformView()));
-
+  // Navigator.of(context).push(MaterialPageRoute(
+  //     builder: (BuildContext context) => PhotoPlatformView()));
 
   @override
   void dispose() {

@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 
 import 'package:cctracker/bloc/Bloc.dart';
@@ -8,21 +6,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NavDrawer extends Drawer {
-
   int selectedPage;
   VoidCallback callbackHome;
   VoidCallback callbackPhoto;
   VoidCallback callbackSettings;
-
-
 
   NavDrawer({
     @required int selectedPage,
     @required VoidCallback callbackHome,
     @required VoidCallback callbackPhoto,
     @required VoidCallback callbackSettings,
-  })  :
-        assert(selectedPage != null),
+  })  : assert(selectedPage != null),
         assert(callbackHome != null),
         assert(callbackPhoto != null),
         assert(callbackSettings != null),
@@ -35,7 +29,7 @@ class NavDrawer extends Drawer {
   Widget build(BuildContext context) {
     bloc.fetchPhoto();
 
-    return  Drawer(
+    return Drawer(
       child: ListView(
         children: <Widget>[
           ListTile(
@@ -57,6 +51,4 @@ class NavDrawer extends Drawer {
       ),
     );
   }
-
-
 }

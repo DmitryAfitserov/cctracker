@@ -5,30 +5,37 @@ import 'package:cctracker/models/PhotoData.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+typedef void IntCallback(int index);
+
 class NavDrawer extends Drawer {
-  final void Function(int) callback;
+  final IntCallback callback;
   int selectedPage;
-  VoidCallback callbackHome;
-  VoidCallback callbackPhoto;
-  VoidCallback callbackSettings;
+  // VoidCallback callbackHome;
+  // VoidCallback callbackPhoto;
+  // VoidCallback callbackSettings;
 
-  NavDrawer({
-    @required int selectedPage,
-    @required VoidCallback callbackHome,
-    @required VoidCallback callbackPhoto,
-    @required VoidCallback callbackSettings,
-    @required Function(int) callback,
+  // NavDrawer({
+  //   @required int selectedPage,
+  //   @required VoidCallback callbackHome,
+  //   @required VoidCallback callbackPhoto,
+  //   @required VoidCallback callbackSettings,
+  //   @required Function(int) callback(int),
+  //
+  // }
+  //
+  // )  : assert(selectedPage != null),
+  //       assert(callbackHome != null),
+  //       assert(callbackPhoto != null),
+  //       assert(callbackSettings != null),
+  //       assert(callback != null),
+  //       this.selectedPage = selectedPage,
+  //       this.callbackHome = callbackHome,
+  //       this.callbackPhoto = callbackPhoto,
+  //
+  //       this.callbackSettings = callbackSettings,
+  //       this.callback;
 
-  })  : assert(selectedPage != null),
-        assert(callbackHome != null),
-        assert(callbackPhoto != null),
-        assert(callbackSettings != null),
-        assert(callback != null),
-        this.selectedPage = selectedPage,
-        this.callbackHome = callbackHome,
-        this.callbackPhoto = callbackPhoto,
-        this.callback = callback,
-        this.callbackSettings = callbackSettings;
+  NavDrawer(this.callback, this.selectedPage);
 
   @override
   Widget build(BuildContext context) {
@@ -40,20 +47,22 @@ class NavDrawer extends Drawer {
           ListTile(
             title: Text("Item 1"),
             trailing: Icon(Icons.arrow_forward),
-            onTap: callback(0),
+            onTap: () => callback(0),
           ),
           ListTile(
             title: Text("Item 2"),
             trailing: Icon(Icons.arrow_forward),
-            onTap: callbackPhoto,
+            onTap: () => callback(1),
           ),
           ListTile(
             title: Text("Item 3"),
             trailing: Icon(Icons.arrow_forward),
-            onTap: callbackSettings,
+            onTap: () => callback(2),
           ),
         ],
       ),
     );
   }
+
+
 }

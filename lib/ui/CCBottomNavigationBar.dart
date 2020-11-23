@@ -7,7 +7,6 @@ import 'package:cctracker/ui/widget/NavDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-typedef void IntCallback(int index);
 
 class CCBottomNavigationBar extends StatefulWidget {
   @override
@@ -54,12 +53,12 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar>
         title: Text(appBarTitle),
       ),
       key: drawerKey,
-      drawer: NavDrawer(
-          selectedPage: currentIndexBottomBar,
-          callbackHome: () => onTabTappedDrawer(0),
-          callbackPhoto: () => onTabTappedDrawer(1),
-          callbackSettings: () => onTabTappedDrawer(2),
-          callback: IntCallback,
+      drawer: NavDrawer( onTabTappedDrawer, 0
+          // selectedPage: currentIndexBottomBar,
+          // callbackHome: () => onTabTappedDrawer(0),
+          // callbackPhoto: () => onTabTappedDrawer(1),
+          // callbackSettings: () => onTabTappedDrawer(2),
+          // callback: onTabTappedDrawer,
       ),
 
       body: childrenStates[currentIndexBottomBar],

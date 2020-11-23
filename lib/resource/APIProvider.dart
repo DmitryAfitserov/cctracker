@@ -8,8 +8,28 @@ class APIProvider {
       "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=60&convert=USD&CMC_PRO_API_KEY=28ba80ec-0caa-494e-8ac0-176a5a0e8e4d";
 
   Future<List<CCData>> loadCC() async {
-    final response = await http.get(apiUrl);
 
+    if(data != null){
+      if(data.length > 0){
+        return data;
+      }
+    }
+
+    data = await getDataListCC();
+    return data;
+  }
+
+  Future<List<CCData>> upDateCC() async {
+
+    data = await getDataListCC();
+    return data;
+  }
+
+
+
+  Future<List<CCData>> getDataListCC() async{
+    final response = await http.get(apiUrl);
+    print(response);
     if (response.statusCode == 200) {
       print(response.body);
 
@@ -28,12 +48,12 @@ class APIProvider {
       });
 
       // setState(() {
-      data = ccDataList;
+      return ccDataList;
       // });
 
     }
-    return data;
   }
+
 
   double reciprocal(double d) => 1 / d;
 

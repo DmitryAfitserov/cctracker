@@ -9,6 +9,7 @@ class Repository {
   final preferencesUtil = PreferencesUtil();
 
   Future<List<CCData>> fetchListData() => apiProvider.loadCC();
+  Future<List<CCData>> upDateListData() => apiProvider.upDateCC();
 
   Future<List<PhotoData>> fetchPhoto() => preferencesUtil.loadListPhoto();
 

@@ -23,6 +23,12 @@ class Bloc {
     _fetcherListData.sink.add(list);
   }
 
+  upDateListData() async {
+    _fetcherListData.sink.add(null);
+    List<CCData> list = await _repository.upDateListData();
+    _fetcherListData.sink.add(list);
+  }
+
   fetchPhoto() async {
     List<PhotoData> listPhoto = await _repository.fetchPhoto();
     if (listPhotoOld != null) {

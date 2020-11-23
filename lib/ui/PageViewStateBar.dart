@@ -89,7 +89,7 @@ class PageVIewStateBarState extends State<PageVIewStateBar> with SingleTickerPro
 
         floatingActionButton: FloatingActionButton(
             child: Icon(Icons.refresh),
-            onPressed: () => bloc.fetchListData()
+            onPressed: () => bloc.upDateListData()
         )
 
 
@@ -98,6 +98,7 @@ class PageVIewStateBarState extends State<PageVIewStateBar> with SingleTickerPro
 
   Widget createStreamBuilder(){
     return StreamBuilder(
+
       stream: bloc.dataCC,
       builder: (context, AsyncSnapshot<List<CCData>> snapshot) {
         if (snapshot.hasData) {

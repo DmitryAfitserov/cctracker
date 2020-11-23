@@ -53,7 +53,7 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar>
         title: Text(appBarTitle),
       ),
       key: drawerKey,
-      drawer: NavDrawer( onTabTappedDrawer, 0
+      drawer: NavDrawer( onTabTappedDrawer, currentIndexBottomBar
           // selectedPage: currentIndexBottomBar,
           // callbackHome: () => onTabTappedDrawer(0),
           // callbackPhoto: () => onTabTappedDrawer(1),
@@ -101,12 +101,13 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar>
         break;
     }
     setState(() {
-      appBarTitle = tmpTitle;
+   //   appBarTitle = tmpTitle;
       currentIndexBottomBar = index;
     });
   }
 
   void onTabTappedDrawer(int index) {
+    print(index);
     Navigator.of(context).pop();
     if (index != currentIndexBottomBar) {
       onTabTapped(index);

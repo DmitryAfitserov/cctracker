@@ -20,17 +20,20 @@ class Bloc {
   Observable<List<PhotoData>> get dataPhotos => _fetcherPhoto.stream;
 
   fetchListData() async {
+    print(Text("fetchListData() async"));
     List<CCData> list = await _repository.fetchListData();
     _fetcherListData.sink.add(list);
   }
 
   upDateListData() async {
+    print(Text("fetchPhoto() async"));
     _fetcherListData.sink.add(null);
     List<CCData> list = await _repository.upDateListData();
     _fetcherListData.sink.add(list);
   }
 
   fetchPhoto() async {
+    print(Text("fetchPhoto() async"));
     List<PhotoData> listPhoto = await _repository.fetchPhoto();
     if (listPhotoOld != null) {
       if (listPhotoOld.length != listPhoto.length) {
@@ -41,6 +44,7 @@ class Bloc {
         print("-------------------- error");
       }
     } else {
+      print("-------------------- ok");
       listPhotoOld = listPhoto;
       _fetcherPhoto.sink.add(listPhoto);
     }
@@ -67,6 +71,7 @@ class Bloc {
 
   disposePhotoStateBar(){
     listPhotoOld = null;
+    print(Text("listPhotoOld == null"));
   }
 
 

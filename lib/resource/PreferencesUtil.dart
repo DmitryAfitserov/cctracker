@@ -39,11 +39,9 @@ class PreferencesUtil {
 
       return dataPhotos;
     } else {
-      print("==== =---- - -   dataPhotos.isNotEmpty");
+      print("==== =---- - -   dataPhotos.isNotEmpty length = " + dataPhotos.length.toString());
       return dataPhotos;
     }
-
-
 
   }
 

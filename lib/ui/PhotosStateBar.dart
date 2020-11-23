@@ -103,6 +103,7 @@ class PhotosStateBarState extends State<PhotosStateBar> {
 
   @override
   void dispose() {
+    print("dispose photoStateBar");
     bloc.disposePhotoStateBar();
     super.dispose();
   }

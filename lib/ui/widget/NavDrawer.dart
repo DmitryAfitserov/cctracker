@@ -39,28 +39,34 @@ class NavDrawer extends Drawer {
 
   @override
   Widget build(BuildContext context) {
-    bloc.fetchPhoto();
 
     return Drawer(
-      child: ListView(
-        children: <Widget>[
-          ListTile(
-            title: Text("Item 1"),
-            trailing: Icon(Icons.arrow_forward),
-            onTap: () => callback(0),
-          ),
-          ListTile(
-            title: Text("Item 2"),
-            trailing: Icon(Icons.arrow_forward),
-            onTap: () => callback(1),
-          ),
-          ListTile(
-            title: Text("Item 3"),
-            trailing: Icon(Icons.arrow_forward),
-            onTap: () => callback(2),
-          ),
-        ],
-      ),
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 50, horizontal: 0),
+        child: ListView(
+          children: <Widget>[
+            ListTile(
+              title: Text("Item 1"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () => callback(0),
+            ),
+            ListTile(
+              title: Text("Item 2"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () => callback(1),
+            ),
+            ListTile(
+              title: Text("Item 3"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () => callback(2),
+            ),
+          ],
+        ),
+        
+        
+      )
+      
+      
     );
   }
 

@@ -10,6 +10,7 @@ class Bloc {
   final _repository = Repository();
 
   List<PhotoData> listPhotoOld;
+  int savePage = 0;
 
   final _fetcherListData = PublishSubject<List<CCData>>();
   final _fetcherPhoto = PublishSubject<List<PhotoData>>();

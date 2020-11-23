@@ -52,6 +52,7 @@ class PageVIewStateBarState extends State<PageVIewStateBar> with SingleTickerPro
   }
 
   onPageChange(int index, {PageController p, TabController t}) async {
+    print("index --- - = $index");
     if (p != null) {//determine which switch is
       isPageCanChanged = false;
       await mPageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);//Wait for pageview to switch, then release pageivew listener
@@ -59,6 +60,9 @@ class PageVIewStateBarState extends State<PageVIewStateBar> with SingleTickerPro
     } else {
       mTabController.animateTo(index); //Switch Tabbar
     }
+    bloc.savePage = index;
+
+    print("index --- - = " + bloc.savePage.toString());
 
   }
 
@@ -68,8 +72,8 @@ class PageVIewStateBarState extends State<PageVIewStateBar> with SingleTickerPro
     bloc.fetchListData();
     return Scaffold(
         appBar: AppBar(
-          title: Text("CC Tracker"),
-          bottom: TabBar(
+        //  title: Text("CC Tracker"),
+          title: TabBar(
 
             //  isScrollable: true,
               controller: mTabController,
@@ -136,7 +140,7 @@ class PageVIewStateBarState extends State<PageVIewStateBar> with SingleTickerPro
       // controller: pageController,
       controller: mPageController,
       onPageChanged: (index) {
-        if (isPageCanChanged) { // because the pageview switch will call back this method, it will trigger the switch tabbar operation, so define a flag, control pageview callback
+        if (isPageCanChanged) {
           onPageChange(index);
         }
       },
@@ -145,6 +149,7 @@ class PageVIewStateBarState extends State<PageVIewStateBar> with SingleTickerPro
         CCList(dataPage2), // FROM $ 10 TO $ 100
         CCList(dataPage3) //FROM $ 100
       ],
+
     );
 
     // return PageView.builder(

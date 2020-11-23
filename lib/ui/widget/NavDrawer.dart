@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NavDrawer extends Drawer {
+  final void Function(int) callback;
   int selectedPage;
   VoidCallback callbackHome;
   VoidCallback callbackPhoto;
@@ -16,13 +17,17 @@ class NavDrawer extends Drawer {
     @required VoidCallback callbackHome,
     @required VoidCallback callbackPhoto,
     @required VoidCallback callbackSettings,
+    @required Function(int) callback,
+
   })  : assert(selectedPage != null),
         assert(callbackHome != null),
         assert(callbackPhoto != null),
         assert(callbackSettings != null),
+        assert(callback != null),
         this.selectedPage = selectedPage,
         this.callbackHome = callbackHome,
         this.callbackPhoto = callbackPhoto,
+        this.callback = callback,
         this.callbackSettings = callbackSettings;
 
   @override
@@ -35,7 +40,7 @@ class NavDrawer extends Drawer {
           ListTile(
             title: Text("Item 1"),
             trailing: Icon(Icons.arrow_forward),
-            onTap: callbackHome,
+            onTap: callback(0),
           ),
           ListTile(
             title: Text("Item 2"),

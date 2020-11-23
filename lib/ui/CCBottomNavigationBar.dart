@@ -7,6 +7,8 @@ import 'package:cctracker/ui/widget/NavDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+typedef void IntCallback(int index);
+
 class CCBottomNavigationBar extends StatefulWidget {
   @override
   State createState() {
@@ -16,6 +18,9 @@ class CCBottomNavigationBar extends StatefulWidget {
 
 class CCBottomNavigationBarState extends State<CCBottomNavigationBar>
     with WidgetsBindingObserver {
+
+
+
   int currentIndexBottomBar = 0;
   String appBarTitle = "Crypto Tracker";
   final String trackerTitle = "Crypto Tracker";
@@ -53,7 +58,10 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar>
           selectedPage: currentIndexBottomBar,
           callbackHome: () => onTabTappedDrawer(0),
           callbackPhoto: () => onTabTappedDrawer(1),
-          callbackSettings: () => onTabTappedDrawer(2)),
+          callbackSettings: () => onTabTappedDrawer(2),
+          callback: IntCallback,
+      ),
+
       body: childrenStates[currentIndexBottomBar],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -108,6 +116,10 @@ class CCBottomNavigationBarState extends State<CCBottomNavigationBar>
 
   // Navigator.of(context).push(MaterialPageRoute(
   //     builder: (BuildContext context) => PhotoPlatformView()));
+
+  void callbackDrawer(int index){
+
+  }
 
   @override
   void dispose() {

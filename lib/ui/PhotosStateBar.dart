@@ -66,7 +66,6 @@ class PhotosStateBarState extends State<PhotosStateBar> {
   }
 
   Widget createList(AsyncSnapshot<List<PhotoData>> snapshot) {
-
     return ListView.builder(
       itemCount: snapshot.data.length,
       itemBuilder: (BuildContext ctxt, int index) {
@@ -81,8 +80,8 @@ class PhotosStateBarState extends State<PhotosStateBar> {
 
   void onPressItem(String path) {
     print("On pressed item path = $path");
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => PhotosInteractiveViewer(path)));
-
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => PhotosInteractiveViewer(path)));
   }
 
   void onPressAddPhoto() {

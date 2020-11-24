@@ -1,8 +1,8 @@
 1. Save state in Crypto Tracker - OK
-2. fix bug with load photo - ?
+2. fix bug with load photo - testing
 3. CryptoTracker without appBar - ok
 4. one callback for NavDrawer - ok
 5. view for NavDrawer - ok
-6. Open image full screen
-7. Enlarge opened Image
+6. Open image full screen - ok
+7. Enlarge opened Image - ok
 8. fix bug with load list photos - ok

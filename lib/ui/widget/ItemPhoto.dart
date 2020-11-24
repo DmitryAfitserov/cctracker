@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 
 import 'package:cctracker/bloc/Bloc.dart';
@@ -11,7 +9,6 @@ class ItemPhoto extends StatelessWidget {
   String image;
   String title;
   VoidCallback callback;
-
 
   ItemPhoto({
     @required String image,
@@ -28,14 +25,12 @@ class ItemPhoto extends StatelessWidget {
   Widget build(BuildContext context) {
     bloc.fetchPhoto();
 
-    return  RaisedButton(
+    return RaisedButton(
       onPressed: callback,
       padding: EdgeInsets.symmetric(vertical: 0, horizontal: 2),
       child: Card(
         elevation: 4,
-        child:
-
-        Row(
+        child: Row(
           children: [
             Container(
               margin: EdgeInsets.all(8),
@@ -43,20 +38,19 @@ class ItemPhoto extends StatelessWidget {
               width: 152.0,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: FileImage(File(image))
-                  ,
+                  image: FileImage(File(image)),
                   fit: BoxFit.fill,
                 ),
                 // shape: BoxShape.circle,
               ),
             ),
-            Text(title, style: TextStyle(fontSize: 16),),
+            Text(
+              title,
+              style: TextStyle(fontSize: 16),
+            ),
           ],
         ),
       ),
-
     );
   }
-
-
 }

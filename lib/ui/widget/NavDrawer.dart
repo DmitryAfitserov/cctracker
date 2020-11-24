@@ -10,6 +10,7 @@ typedef void IntCallback(int index);
 class NavDrawer extends Drawer {
   final IntCallback callback;
   int selectedPage;
+
   // VoidCallback callbackHome;
   // VoidCallback callbackPhoto;
   // VoidCallback callbackSettings;
@@ -40,35 +41,69 @@ class NavDrawer extends Drawer {
   @override
   Widget build(BuildContext context) {
 
+    List<bool> selected = [false, false, false];
+    selected[selectedPage] = true;
+
     return Drawer(
-      child: Container(
-        margin: EdgeInsets.symmetric(vertical: 50, horizontal: 0),
-        child: ListView(
-          children: <Widget>[
-            ListTile(
-              title: Text("Item 1"),
-              trailing: Icon(Icons.arrow_forward),
-              onTap: () => callback(0),
+
+      child: Column(
+
+          children: [
+        Container(
+            margin: EdgeInsets.fromLTRB(0, 24, 0, 24),
+          height: 160,
+          width: 160,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/background_setting.jpg'),
+              fit: BoxFit.fill,
             ),
-            ListTile(
-              title: Text("Item 2"),
-              trailing: Icon(Icons.arrow_forward),
-              onTap: () => callback(1),
-            ),
-            ListTile(
-              title: Text("Item 3"),
-              trailing: Icon(Icons.arrow_forward),
-              onTap: () => callback(2),
-            ),
-          ],
+             shape: BoxShape.circle,
+          ),
         ),
-        
-        
-      )
-      
-      
+        Divider(
+          color: Colors.blueGrey,
+
+          height: 0,
+        ),
+        ListTile(
+          title: Text("Item 1"),
+          leading: Icon(Icons.home),
+          trailing: Icon(Icons.arrow_forward),
+          onTap: () => callback(0),
+          selected: selected[0],
+
+          //   se
+        ),
+        new Divider(
+          color: Colors.blueGrey,
+          height: 0,
+        ),
+        ListTile(
+          title: Text("Item 2"),
+          leading: Icon(Icons.photo),
+          trailing: Icon(Icons.arrow_forward),
+          onTap: () => callback(1),
+          selected: selected[1],
+        ),
+        new Divider(
+          color: Colors.blueGrey,
+          height: 0,
+        ),
+        ListTile(
+          title: Text("Item 3"),
+          leading: Icon(Icons.settings),
+          trailing: Icon(Icons.arrow_forward),
+          onTap: () => callback(2),
+          selected: selected[2],
+        ),
+        new Divider(
+          color: Colors.blueGrey,
+          height: 0,
+        )
+      ],
+
+      ),
     );
   }
-
-
 }

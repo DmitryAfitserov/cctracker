@@ -1,5 +1,6 @@
 import 'package:cctracker/bloc/Bloc.dart';
 import 'package:cctracker/models/PhotoData.dart';
+import 'package:cctracker/ui/PhotoInteractiveViewer.dart';
 import 'package:cctracker/ui/widget/ItemPhoto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -65,20 +66,23 @@ class PhotosStateBarState extends State<PhotosStateBar> {
   }
 
   Widget createList(AsyncSnapshot<List<PhotoData>> snapshot) {
+
     return ListView.builder(
       itemCount: snapshot.data.length,
       itemBuilder: (BuildContext ctxt, int index) {
         return ItemPhoto(
           image: snapshot.data[index].path,
           title: snapshot.data[index].title,
-          callback: () => onPressItem(index),
+          callback: () => onPressItem(snapshot.data[index].path),
         );
       },
     );
   }
 
-  void onPressItem(int position) {
-    print("On pressed item position $position");
+  void onPressItem(String path) {
+    print("On pressed item path = $path");
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => PhotosInteractiveViewer(path)));
+
   }
 
   void onPressAddPhoto() {

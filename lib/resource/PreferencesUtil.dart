@@ -17,10 +17,12 @@ class PreferencesUtil {
 
   Future<List<PhotoData>> loadListPhoto() async {
 
+    //dataPhotos.clear(); // clean
+
     if(dataPhotos.isEmpty){
       print("==== =---- - -   dataPhotos.isEmpty");
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-     // prefs.remove(KEY_PREF);
+    //  prefs.remove(KEY_PREF);  // clean
       String jsonList = prefs.getString(KEY_PREF);
       print("==== =---- - -   saveData from pref =   $jsonList ");
       if(jsonList == null){
